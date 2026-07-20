@@ -2,7 +2,10 @@
   "name": "@hal/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "evals": "nx run-many -t eval",
+    "evals:affected": "nx affected -t eval"
+  },
   "private": true,
   "dependencies": {},
   "devDependencies": {

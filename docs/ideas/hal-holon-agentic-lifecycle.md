@@ -1,6 +1,7 @@
 # HAL — Holon Agentic Lifecycle
 
 > Status: refined idea, converged 2026-07-20. Form: **methodology first**, tested **greenfield**, judged by **validated learning** (target: Dec 2026).
+> Frozen as provenance. The living layer: [constitution](../constitution.md) · [pilot: forex trader](../pilot-forex-trader.md) (chosen 2026-07-20) · [notebook](../notebook/README.md).
 
 ## Problem Statement
 
