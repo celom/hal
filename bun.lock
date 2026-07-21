@@ -13,6 +13,34 @@
         "typescript": "~6.0.3",
       },
     },
+    "packages/tickets": {
+      "name": "@hal/tickets",
+      "version": "0.0.0",
+      "dependencies": {
+        "@hal/tickets-cli": "workspace:*",
+        "@hal/tickets-model": "workspace:*",
+        "@hal/tickets-store": "workspace:*",
+      },
+    },
+    "packages/tickets-cli": {
+      "name": "@hal/tickets-cli",
+      "version": "0.0.0",
+      "dependencies": {
+        "@hal/tickets-model": "workspace:*",
+        "@hal/tickets-store": "workspace:*",
+      },
+    },
+    "packages/tickets-model": {
+      "name": "@hal/tickets-model",
+      "version": "0.0.0",
+    },
+    "packages/tickets-store": {
+      "name": "@hal/tickets-store",
+      "version": "0.0.0",
+      "dependencies": {
+        "@hal/tickets-model": "workspace:*",
+      },
+    },
   },
   "packages": {
     "@babel/code-frame": ["@babel/code-frame@7.29.7", "", { "dependencies": { "@babel/helper-validator-identifier": "^7.29.7", "js-tokens": "^4.0.0", "picocolors": "^1.1.1" } }, "sha512-Aup7aUOfpbAUg2ROOJN6Iw5f9DMBlzu0mIkm/malLQFN/YQgO48wCj0Kxa3sEHJvPVFg7siR+qRInwXd2qhQKw=="],
@@ -216,6 +244,14 @@
     "@emnapi/runtime": ["@emnapi/runtime@1.4.5", "", { "dependencies": { "tslib": "^2.4.0" } }, "sha512-++LApOtY0pEEz1zrd9vy1/zXVaVJJ/EbAF3u0fXIzPJEDtnITsBGbbK0EkM72amhl/R5b+5xx0Y/QhcVOpuulg=="],
 
     "@emnapi/wasi-threads": ["@emnapi/wasi-threads@1.0.4", "", { "dependencies": { "tslib": "^2.4.0" } }, "sha512-PJR+bOmMOPH8AtcTGAyYNiuJ3/Fcoj2XN/gBEWzDIKh254XO+mM9XoXHk5GNEhodxeMznbg7BlRojVbKN+gC6g=="],
+
+    "@hal/tickets": ["@hal/tickets@workspace:packages/tickets"],
+
+    "@hal/tickets-cli": ["@hal/tickets-cli@workspace:packages/tickets-cli"],
+
+    "@hal/tickets-model": ["@hal/tickets-model@workspace:packages/tickets-model"],
+
+    "@hal/tickets-store": ["@hal/tickets-store@workspace:packages/tickets-store"],
 
     "@jest/diff-sequences": ["@jest/diff-sequences@30.0.1", "", {}, "sha512-n5H8QLDJ47QqbCNn5SuFjCRDrOLEZ0h8vAHCK5RL9Ls7Xa8AQLa/YxAc9UjFqoEDM48muwtBGjtMY5cr0PLDCw=="],
 

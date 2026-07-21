@@ -1,0 +1,15 @@
+{
+  "name": "@hal/tickets-store",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "evals": "bun test evals"
+  },
+  "exports": {
+    ".": "./contract.ts"
+  },
+  "dependencies": {
+    "@hal/tickets-model": "workspace:*"
+  }
+}

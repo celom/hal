@@ -1,0 +1,16 @@
+{
+  "name": "@hal/tickets-cli",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./contract.ts"
+  },
+  "scripts": {
+    "evals": "bun test evals"
+  },
+  "dependencies": {
+    "@hal/tickets-model": "workspace:*",
+    "@hal/tickets-store": "workspace:*"
+  }
+}
