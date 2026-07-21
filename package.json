@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "evals": "nx run-many -t eval",
-    "evals:affected": "nx affected -t eval"
+    "evals": "nx run-many -t evals",
+    "evals:affected": "nx affected -t evals"
   },
   "private": true,
   "dependencies": {},

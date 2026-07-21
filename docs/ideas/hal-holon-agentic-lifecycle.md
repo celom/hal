@@ -1,7 +1,8 @@
 # HAL — Holon Agentic Lifecycle
 
 > Status: refined idea, converged 2026-07-20. Form: **methodology first**, tested **greenfield**, judged by **validated learning** (target: Dec 2026).
-> Frozen as provenance. The living layer: [constitution](../constitution.md) · [pilot: forex trader](../pilot-forex-trader.md) (chosen 2026-07-20) · [notebook](../notebook/README.md).
+> **Renamed 2026-07-21:** HAL now expands to **Holonic Agentic Loop** — the holonic bundle is only half the pattern; the pledge is binding it to the agentic loop. Title below kept as frozen provenance.
+> Frozen as provenance. The living layer: [rulebook](../rulebook.md) · [notebook](../notebook/README.md).
 
 ## Problem Statement
 
@@ -38,7 +39,7 @@ Dev-time units, runtime-agnostic: holons are units of *regeneration*, not deploy
 Each rule is falsifiable. Amend with citations to notebook entries.
 
 - **R1 — The bundle.** Every holon ships four parts: `INTENT` (assertions, invariants, anti-goals — written for an agent reader), `CONTRACT` (typed inputs/outputs), `EVALS` (executable acceptance — the *only* definition of done), `IMPL` (disposable). No holon without all four.
-- **R2 — Contracts only.** A holon may depend on other holons' contracts, never their implementations. (Enforceable today via Nx module boundaries.)
+- **R2 — Contracts only.** A holon may depend on other holons' contracts, never their implementations. (Enforceable today via Nx module boundaries — non-binding.)
 - **R3 — Replaceability invariant.** Any implementation that passes the holon's evals plus every ancestor's composition evals is a legal replacement. If a legal replacement breaks the system, the *evals* were wrong: fix the evals, log the escape.
 - **R4 — Context budget.** A holon must be workable within a declared token budget: bundle + direct dependencies' contracts ≤ B. Exceeding B forces a split. Size is measured in cognition, not lines — the constraint human SDLC never had and agents make enforceable.
 - **R5 — Recursive closure.** A composite holon's implementation *is* its children's bundles plus glue. Decomposition is therefore just implementation at composite grain: leaf cycles write code; composite cycles write child intents, contracts, and evals. Architecture emerges from the same cycle type as everything else.
