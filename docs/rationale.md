@@ -2,6 +2,14 @@
 
 Why the [canon](canon.md) is shaped the way it is: the problem, the bet, and the instruments that judge it.
 
+## References
+
+> Biology: A cell is a whole, self-contained unit, but it is also a part of a tissue, which is part of an organ, which is part of a body.
+
+> Sociology: An individual human is a distinct whole, but also a part of a family, a community, and a society.
+
+> Business & Manufacturing: A manufacturing machine is an autonomous holon that coordinates with other machines to form a whole production line, which itself is a part of a larger factory.
+
 ## Problem Statement
 
 **How might we redesign the unit of software delivery so that all the context an agent needs — intent, contract, and verification — travels *with* the deliverable, making any piece of a system understandable, buildable, and replaceable within a single agent session, with no reliance on accumulated memory?**
