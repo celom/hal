@@ -1,10 +1,10 @@
 # Polyglot holons
 
-Use-case exploration: each holon is created — or mandated — by developers working in different languages and runtimes. One holon in Python, its neighbor in Go, another in TypeScript. Same rulebook, same loop, heterogeneous implementations.
+Use-case exploration: each holon is created — or mandated — by developers working in different languages and runtimes. One holon in Python, its neighbor in Go, another in TypeScript. Same canon, same loop, heterogeneous implementations.
 
 ## Premise
 
-Nothing in the HAL protocol is language-bound except one artifact: `contract.ts`. The rulebook, the cycle loop, the approval mechanism, the notebook — all language-neutral. If the contract artifact is generalized, the entire methodology applies to a polyglot system unchanged.
+Nothing in the HAL protocol is language-bound except one artifact: `contract.ts`. The canon, the cycle loop, the approval mechanism, the notebook — all language-neutral. If the contract artifact is generalized, the entire methodology applies to a polyglot system unchanged.
 
 ## Why this strengthens the pattern
 
@@ -56,7 +56,7 @@ A second, agent-shaped variant: the agent itself picks the runtime best suited t
 
 ## Protocol gaps the org-shaped case exposes
 
-Two mechanisms the rulebook lacks. Both are multi-owner problems, not polyglot problems — but the org-shaped case is where they become unavoidable.
+Two mechanisms the canon lacks. Both are multi-owner problems, not polyglot problems — but the org-shaped case is where they become unavoidable.
 
 ### Two-key approval
 
@@ -78,7 +78,7 @@ This gives seam findings a formal destination. Instead of logging "the contract 
 ## Failure modes to watch
 
 1. **IDL drift** — a holon's binding diverges from the IDL because regeneration wasn't forced. Mitigation: bindings are build artifacts, never committed.
-2. **Seam bypass via side channels** — shared database, shared files, environment variables. The runtime boundary blocks imports, not ambient state. The rulebook's seam-finding discipline still carries this load.
+2. **Seam bypass via side channels** — shared database, shared files, environment variables. The runtime boundary blocks imports, not ambient state. The canon's seam-finding discipline still carries this load.
 3. **Eval harness monoculture** — the orchestrator itself becomes a privileged holon written in one language, quietly re-centralizing what the pattern decentralized. Acceptable, but name it.
 
 ## Cheapest probe

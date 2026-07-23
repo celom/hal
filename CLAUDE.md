@@ -1,6 +1,6 @@
 # HAL — agent session protocol
 
-This repo runs under the HAL rulebook: `docs/rulebook.md`. Read it once per session. This file is the operational loop; the rulebook wins on any conflict.
+This repo runs under the HAL canon: `docs/canon.md`. Read it once per session. This file is the operational loop; the canon wins on any conflict.
 
 ## The Loop (every cycle)
 

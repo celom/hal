@@ -45,7 +45,7 @@ These are upfront suggestions, not prescriptions. Layout is a team choice: pick 
 
 ## Indexing — the holon catalog
 
-How the system (an agent, a session, a query) discovers existing holons and their intent without walking the codebase. Two customers from the rulebook: routing (R4's unstated step zero — *which* holon does this task belong to?) and orphan detection (R7's deletion-review trigger is a catalog query).
+How the system (an agent, a session, a query) discovers existing holons and their intent without walking the codebase. Two customers from the canon: routing (R4's unstated step zero — *which* holon does this task belong to?) and orphan detection (R7's deletion-review trigger is a catalog query).
 
 ### Source of truth: `INTENT.md` frontmatter
 
