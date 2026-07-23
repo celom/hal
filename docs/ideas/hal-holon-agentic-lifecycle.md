@@ -39,7 +39,7 @@ Dev-time units, runtime-agnostic: holons are units of *regeneration*, not deploy
 Each rule is falsifiable. Amend with citations to notebook entries.
 
 - **R1 — The bundle.** Every holon ships four parts: `INTENT` (assertions, invariants, anti-goals — written for an agent reader), `CONTRACT` (typed inputs/outputs), `EVALS` (executable acceptance — the *only* definition of done), `IMPL` (disposable). No holon without all four.
-- **R2 — Contracts only.** A holon may depend on other holons' contracts, never their implementations. (Enforceable today via Nx module boundaries — non-binding.)
+- **R2 — Contracts only.** A holon may depend on other holons' contracts, never their implementations. (Enforceable today via module-boundary lint rules — non-binding.)
 - **R3 — Replaceability invariant.** Any implementation that passes the holon's evals plus every ancestor's composition evals is a legal replacement. If a legal replacement breaks the system, the *evals* were wrong: fix the evals, log the escape.
 - **R4 — Context budget.** A holon must be workable within a declared token budget: bundle + direct dependencies' contracts ≤ B. Exceeding B forces a split. Size is measured in cognition, not lines — the constraint human SDLC never had and agents make enforceable.
 - **R5 — Recursive closure.** A composite holon's implementation *is* its children's bundles plus glue. Decomposition is therefore just implementation at composite grain: leaf cycles write code; composite cycles write child intents, contracts, and evals. Architecture emerges from the same cycle type as everything else.
@@ -77,7 +77,7 @@ flowchart LR
 ## Stress-Test Summary
 
 - **User value — painkiller.** For the researcher: converts a conviction into an experiment that wins either way (working method or sharp post-mortem). For the field: the seam census and disposability threshold don't exist publicly; even small-n numbers are contributions.
-- **Feasibility — high, by design.** Near-zero tooling cost (Nx boundaries, git, agent CLI, folder conventions already suffice). Time-to-value: first cycle within days of picking a pilot. The hardest part, and the load-bearing wall: **writing evals good enough to carry the replaceability invariant**.
+- **Feasibility — high, by design.** Near-zero tooling cost (module-boundary linting, git, agent CLI, folder conventions already suffice). Time-to-value: first cycle within days of picking a pilot. The hardest part, and the load-bearing wall: **writing evals good enough to carry the replaceability invariant**.
 - **Differentiation.** Spec-driven development (Kiro, SpecKit) stops at spec→code: no replaceability invariant, no lifecycle, no measurement. TDD is function-grain, human-paced, refactor-not-regenerate. Microservices are a runtime answer to an organizational problem; HAL is a dev-time answer to a context problem. The novel composite: **enforceable context budgets + regeneration invariant + homeostatic trigger + built-in falsification.** (Individual pieces float around — spec-driven tooling, eval-driven chatter, disposable-software essays. Claim the composition, not the pieces.)
 
 ## Key Assumptions to Validate
