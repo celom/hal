@@ -30,7 +30,7 @@ Every rule is falsifiable. Breaking one in practice is a finding, not a failure 
 
 - **D1 — Context budget.** B = 50,000 tokens per holon. Record actual consumption per cycle; revise with data.
 - **D2 — Approval mechanics.** Durable files (`INTENT.md`, `contract.ts`, `evals/**`, this rulebook) change only in `approve:`-prefixed commits, authored by a human after reviewing the agent's draft — agents draft content, never `approve:` commits. A durable file's status is derived from git — approved iff its last change landed in an `approve:` commit, draft otherwise — never declared in the file. Implementations merge on green evals in `cycle(NNNN):` commits. Repo meta-work (docs, scaffolding) is never mixed into a cycle commit.
-- **D3 — Eval execution.** Every holon exposes an `evals` target; `bun run evals` runs all of them.
+- **D3 — Eval execution.** Every holon exposes an `evals` target; a single workspace-level `evals` target runs all of them.
 - **D4 — Minimum eval taxonomy.** Example-based evals per holon; composition evals per composite. Measured escapes decide what further kinds (property-based, budget, behavioral) become mandatory.
 
 ## Holon Anatomy (on-disk convention)

@@ -28,7 +28,7 @@ Each holon codegens its own binding from the IDL. The IDL file is the durable ar
 
 ### Evals: function calls → invocation surface
 
-`bun run evals` becomes an orchestrator over heterogeneous toolchains. Every holon must expose a uniform invocation surface — one of:
+The workspace-level `evals` target becomes an orchestrator over heterogeneous toolchains. Every holon must expose a uniform invocation surface — one of:
 
 - CLI: `<holon> run --input <json>` → JSON on stdout
 - HTTP: local server, contract-defined routes

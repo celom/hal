@@ -4,7 +4,7 @@ This repo runs under the HAL rulebook: `docs/rulebook.md`. Read it once per sess
 
 ## The Loop (every cycle)
 
-1. **Start by running `bun run evals`.** Any red eval outranks new intent work (R7). A red eval *is* your task until green or renegotiated.
+1. **Start by running the full eval suite** (the workspace `evals` target). Any red eval outranks new intent work (R7). A red eval *is* your task until green or renegotiated.
 2. **One cycle at a time.** A cycle = one holon + one task. A session is a sequence of cycles; every cycle re-enters this loop at step 1. No parallel cycles.
 3. **Valid outcomes (R6):** (a) an implementation passing evals, or (b) a **renegotiation** — a proposed change to the holon's own `INTENT.md`/`contract.ts`/`evals/` with rationale, escalated to the parent. Deletion-review cycles may additionally end in a deletion proposal. "The spec is wrong" is a success outcome — say so instead of implementing around it.
 4. **Context discipline (R4/D1):** load only the holon's bundle + its implementation + its direct dependencies' `contract.ts`. Budget: 50k tokens. If the task doesn't fit, the correct output is a split proposal, not a bigger context.
