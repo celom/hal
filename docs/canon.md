@@ -21,13 +21,22 @@ Every rule is falsifiable. Breaking one in practice is a finding, not a failure 
 - **R6 — Valid outcomes.** A cycle returns either (a) an implementation passing evals, or (b) a **renegotiation**: a proposed change to the holon's own intent/contract/evals with rationale, escalated to the parent. Deletion-review cycles (R7) may instead return (c) a **deletion proposal**. Discovering the spec is wrong is a success outcome.
 - **R7 — Steady state by convention.** Every cycle begins by running the full eval suite. Any red eval outranks new intent work. Intents no longer referenced by any parent trigger a **deletion review** — a cycle type whose valid outcomes are deletion or a reprieve with rationale.
 - **R8 — Human as reviewer.** Humans approve changes to the durable layer; humans do not write implementations. Agents draft everything, including proposed evals; approval is the human checkpoint.
-- **R9 — The notebook.** A cycle is not closed until logged: task, type (**composite | leaf | fix | drill | deletion-review**), outcome (**impl | renegotiation | deletion**), failures observed, and failure location (**in-holon | seam | eval-escape**; n/a when none), plus accounting. The agent drafts the entry; entries are small and structured.
+- **R9 — The notebook.** A cycle is not closed until logged. The agent drafts the entry; entries are small and structured. Each entry records:
+  - the task, and the cycle type: **composite | leaf | fix | drill | deletion-review**;
+  - the outcome: **impl | renegotiation | deletion**;
+  - failures observed, and their location: **in-holon | seam | eval-escape** (n/a when none);
+  - accounting (context consumed, agent time, approval time).
 - **R10 — No tooling before convention.** Any tool must be preceded by the written rule it enforces, proven by manual adherence across cycles. No orchestrator until the convention has survived ~30 cycles.
 
 ## Adopted Defaults (revisable with evidence)
 
 - **D1 — Context budget.** B = 50,000 tokens per holon. Record actual consumption per cycle; revise with data.
-- **D2 — Approval mechanics.** Durable files (`INTENT.md`, `contract.ts`, `evals/**`, this canon) change only in `approve:`-prefixed commits, authored by a human after reviewing the agent's draft — agents draft content, never `approve:` commits. A durable file's status is derived from git — approved iff its last change landed in an `approve:` commit, draft otherwise — never declared in the file. Implementations merge on green evals in `cycle(NNNN):` commits. Repo meta-work (docs, scaffolding) is never mixed into a cycle commit.
+- **D2 — Approval mechanics.**
+  - Durable files (`INTENT.md`, `contract.ts`, `evals/**`, this canon) change only in `approve:`-prefixed commits.
+  - `approve:` commits are authored by a human after reviewing the agent's draft; agents draft content, never `approve:` commits.
+  - A durable file's status is derived from git — approved iff its last change landed in an `approve:` commit, draft otherwise — and never declared in the file.
+  - Implementations merge on green evals in `cycle(NNNN):` commits.
+  - Repo meta-work (docs, scaffolding) is never mixed into a cycle commit.
 - **D3 — Eval execution.** Every holon exposes an `evals` target; a single workspace-level `evals` target runs all of them.
 - **D4 — Minimum eval taxonomy.** Example-based evals per holon; composition evals per composite. Measured escapes decide what further kinds (property-based, budget, behavioral) become mandatory.
 

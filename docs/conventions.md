@@ -62,7 +62,7 @@ budget: 50000
 
 ### The index is a query, not a file
 
-The catalog is never materialized. A stored index is a cache of the durable layer, and a cache is only worth its drift risk when derivation is expensive — here it is one command:
+The catalog is never materialized — deriving it is one command, so a stored copy is drift risk with no payoff:
 
 ```sh
 rg '^summary:' --no-heading -g 'INTENT.md' packages/
@@ -70,9 +70,9 @@ rg '^summary:' --no-heading -g 'INTENT.md' packages/
 # status comes from git (approve: commits — D2)
 ```
 
-- **Fresh by construction.** No refresh ritual, no cycle-close step, nothing that can disagree with the INTENT files — the query output *is* the index.
-- **R10 discipline:** when the query outgrows a one-liner (parent columns, sorting, orphan detection), it becomes a small script run on demand — still no stored artifact. Materialize a file only if reading the durable layer live becomes a *measured* context or cost problem; that measurement is the evidence the revision cites.
-- **Orphan detection (R7)** is the same posture: a query run at cycle close (which holon names appear in no parent's children?); findings go into the notebook entry, the output is not stored.
+- **Fresh by construction.** No refresh ritual, nothing that can disagree with the INTENT files — the query output *is* the index.
+- **R10 discipline:** when the query outgrows a one-liner (parent columns, orphan detection), it becomes a small script run on demand — still no stored artifact. Materialize a file only when reading the durable layer live becomes a *measured* context or cost problem.
+- **Orphan detection (R7)** is the same posture: a query run at cycle close (which holon names appear in no parent's children?); findings go into the notebook entry, not a stored file.
 
 ### Use in the Loop
 

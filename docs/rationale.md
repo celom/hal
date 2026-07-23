@@ -8,14 +8,9 @@ Why the [canon](canon.md) is shaped the way it is: the problem, the bet, and the
 
 Traditional SDLC is a process wrapped around a persistent context-holder: the human developer, who accumulates horizontal knowledge over months by iterating on a codebase. LLM agents invert this — knowledge is ephemeral, context is assembled vertically per task. When the context-holder becomes ephemeral, the durable knowledge must move out of heads-and-tangled-code and into the bundle itself.
 
-**The prime axiom (the durable/disposable split):**
+**The prime axiom (the durable/disposable split):** intent, contract, and evals are durable and human-owned; the implementation is disposable and agent-owned. The axiom and its rules live in [the canon](canon.md).
 
-| Layer | Contents | Owner |
-|---|---|---|
-| **Durable** | intent, contract, evals | human-owned (approved) |
-| **Disposable** | implementation | agent-owned (regenerable) |
-
-A **holon** (Koestler) is the unit: simultaneously a whole to its parts and a part to a larger whole. Holons compose into holons — contracts at every level — which dissolves "how small is a unit?" into recursion.
+The unit is the **holon** (Koestler): simultaneously a whole to its parts and a part to a larger whole. Holons compose into holons — contracts at every level — which dissolves "how small is a unit?" into recursion.
 
 ## The Design
 
@@ -25,7 +20,7 @@ One program, three layers:
 A small set of hard rules (12-factor style) defining what a holon is and what may depend on what. Every rule is a claim that can break in practice; breaking one is a finding, not a failure. The rules live in [the canon](canon.md).
 
 ### 2. The Loop — how cycles run
-Steady state, maintained **by convention, not by orchestrator**: every session begins by running evals; red evals outrank new intent work. Cycles have two valid outcomes — an implementation, or a *renegotiation* of the holon's own contract (the upward channel that prevents perfectly executed wrong specs). Deletion is a first-class cycle type. The per-session protocol lives in [CLAUDE.md](../CLAUDE.md).
+Steady state, maintained **by convention, not by orchestrator**: evals first, red outranks new work (R7). Renegotiation is a success outcome (R6) — the upward channel that prevents perfectly executed wrong specs — and deletion is a first-class cycle type. The per-session protocol lives in [CLAUDE.md](../CLAUDE.md).
 
 ### 3. The Lab — how we learn
 Instruments woven into real work: a cycle notebook, a seam census (where do failures actually live?), and disposability drills (regenerate a stable holon blind; did evals catch what broke?). The notebook is the deliverable that makes HAL research rather than vibes.
@@ -103,7 +98,4 @@ If the first drill regenerates a holon and nothing outside the evals' coverage b
 ## Open Questions
 
 1. **The pilot project** — the one genuinely open decision. Criteria: something you actually want (real stakes), expected requirements churn (stresses R6), enough seams to make the census meaningful (a UI + an API + persistence + one external integration), small enough for one human plus agents.
-2. **Initial context budget B** — proposal: start at 50k tokens per holon, measure actual consumption, amend R4 with data.
-3. **Approval mechanics** — proposal: durable files (`INTENT`, contract surface, evals) change only via reviewed PR; implementations merge on green evals without review. Is that discipline sustainable solo?
-4. **Minimum eval taxonomy per holon** — proposal: example-based evals + parent composition evals to start; let measured escapes tell us what kinds are missing (property-based, budget, behavioral).
-5. **When does the steady-state loop get automated?** — R10 says ~30 cycles. Is N=30 right, or should automation wait for a stable escape rate instead of a cycle count?
+2. **When does the steady-state loop get automated?** — R10 says ~30 cycles. Is N=30 right, or should automation wait for a stable escape rate instead of a cycle count?
