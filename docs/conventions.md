@@ -1,8 +1,6 @@
 # Conventions — holons on disk
 
-status: draft — iterating
-
-These are upfront suggestions, not prescriptions. Layout is a team choice: pick **nested** or **flat** per workspace and stay consistent.
+Suggestions, not prescriptions. Layout is a team choice: pick **nested** or **flat** per workspace and stay consistent.
 
 ## Mapping
 

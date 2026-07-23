@@ -1,7 +1,5 @@
 # The HAL Canon
 
-> **Pending approval.** Approval = a human committing this file. Revisions require a citation to a notebook entry (`docs/notebook/`). Origin and rationale are frozen in [the idea document](ideas/hal-holon-agentic-lifecycle.md).
-
 ## The Prime Axiom — the durable/disposable split
 
 | Layer | Contents | Owner |
@@ -22,7 +20,7 @@ Every rule is falsifiable. Breaking one in practice is a finding, not a failure 
 - **R5 — Recursive closure.** A composite holon's implementation *is* its children plus glue. Leaf cycles write code; composite cycles write child intents, contracts, and evals. Architecture emerges from the same cycle type as everything else.
 - **R6 — Valid outcomes.** A cycle returns either (a) an implementation passing evals, or (b) a **renegotiation**: a proposed change to the holon's own intent/contract/evals with rationale, escalated to the parent. Deletion-review cycles (R7) may instead return (c) a **deletion proposal**. Discovering the spec is wrong is a success outcome.
 - **R7 — Steady state by convention.** Every cycle begins by running the full eval suite. Any red eval outranks new intent work. Intents no longer referenced by any parent trigger a **deletion review** — a cycle type whose valid outcomes are deletion or a reprieve with rationale.
-- **R8 — Human as reviewer, not laborer.** Humans approve changes to the durable layer; humans do not write implementations. Agents draft everything, including proposed evals; approval is the human checkpoint.
+- **R8 — Human as reviewer.** Humans approve changes to the durable layer; humans do not write implementations. Agents draft everything, including proposed evals; approval is the human checkpoint.
 - **R9 — The notebook.** A cycle is not closed until logged: task, type (**composite | leaf | fix | drill | deletion-review**), outcome (**impl | renegotiation | deletion**), failures observed, and failure location (**in-holon | seam | eval-escape**; n/a when none), plus accounting. The agent drafts the entry; entries are small and structured.
 - **R10 — No tooling before convention.** Any tool must be preceded by the written rule it enforces, proven by manual adherence across cycles. No orchestrator until the convention has survived ~30 cycles.
 

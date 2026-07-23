@@ -17,6 +17,4 @@ The unit is the **holon** — simultaneously a whole to its parts and a part to 
 - **The Loop** — the per-session protocol in [CLAUDE.md](CLAUDE.md): evals first, one cycle at a time, renegotiation as a success outcome, humans as reviewers rather than laborers.
 - **The Lab** — a cycle [notebook](docs/notebook/), a seam census, and disposability drills. The measurements are the deliverable; this is research, not vibes.
 
-## Status
-
-Methodology-first, tested greenfield, judged by **validated learning** — target Dec 2026: ≥30 logged cycles, ≥5 disposability drills, a seam census worth citing, and a canon revised with citations to notebook entries. Provenance and rationale are frozen in the [idea document](docs/ideas/hal-holon-agentic-lifecycle.md); workspace mechanics live in [conventions](docs/conventions.md).
+The reasoning behind the design lives in [rationale](docs/rationale.md); workspace mechanics in [conventions](docs/conventions.md); explorations beyond the base pattern in [ideas](docs/ideas/).
