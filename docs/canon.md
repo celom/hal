@@ -12,6 +12,10 @@
 
 **Cycle**: An atomic unit of work: one holon operating on one task. Begins by running full evals, executes toward an outcome, and logs its development process.
 
+**Brief**: A frozen, verbatim snapshot of one unit of external product intent, taken when work begins on it. Briefs form an append-only, sequentially numbered log; product state is the fold over the log.
+
+**Loop**: The outer delivery process. A brief enters; cycles run against it, one at a time; a human accepts the outcome or the brief blocks.
+
 ## Component Structure
 
 Every holon contains four required components:
@@ -50,6 +54,16 @@ A cycle begins by running the full eval suite. Red evals outrank new work.
 
 Discovering the specification is wrong constitutes a successful outcome. Intents with no parent references trigger deletion reviews; outcomes are deletion or reprieve with rationale.
 
+## Briefs
+
+Every unit of external intent — issue, feature request, change request — enters as a brief in `docs/briefs/NNNN-<slug>.md`, numbered sequentially. The source tool is never the canonical record.
+
+The log is append-only. A brief is frozen at ingestion. A change request against shipped work is a new brief.
+
+A brief records its source, the source content verbatim, and acceptance criteria — verbatim from the source when present, drafted at ingestion otherwise. Ingestion is uniform across sizes.
+
+Briefs are durable-layer files: agent-drafted, landed by `approve:` commits. Status derives from git, never declared in-file.
+
 ## Resource Constraints
 
 Each holon declares a token budget. Workable scope = bundle + implementation + direct-dependency contracts ≤ budget. Exceeding budget requires splitting.
@@ -62,6 +76,7 @@ Default budget: 50,000 tokens per holon. Record consumption per cycle; revise ba
 
 **Git conventions**:
 - `approve:` commits: durable-layer changes, authored by humans after reviewing agent drafts
+- `accept(NNNN):` commits: brief closure, authored by humans after judging the outcome against the brief's acceptance criteria
 - `cycle(NNNN):` commits: implementations that merge on green evals
 - `meta:` commits: docs and scaffolding, never mixed with cycle work
 
@@ -71,6 +86,7 @@ Default budget: 50,000 tokens per holon. Record consumption per cycle; revise ba
 
 Each cycle must be logged in a logbook entry to close. The agent drafts; the entry records:
 - Task and cycle type
+- Brief served
 - Outcome
 - Failure location if present (in-holon, seam, eval-escape)
 - Accounting (context consumed, agent time, approval time)
@@ -117,6 +133,14 @@ Every holon exposes an `evals` target. Workspace-level `evals` runs all.
 **R9**: Cycles must be logged to close.
 
 **R10**: Tooling follows convention. Manual adherence across ~30 cycles precedes automation.
+
+**R11**: Every unit of external intent enters as a brief. Briefs are frozen at ingestion; the log is append-only. Change requests are new briefs.
+
+**R12**: A brief closes only by human acceptance (`accept:` commit) with all spawned cycles logged. A renegotiation escalating past the root holon blocks the brief; resolution is a new brief.
+
+## Replayability
+
+The brief log, `approve:` commits, `accept:` commits, and the logbook form a totally ordered record. Replaying briefs 0001..n from this record yields a durable layer in the same eval-equivalence class. Cycles run one at a time; the total order makes replay well-defined.
 
 ## Revisability
 
