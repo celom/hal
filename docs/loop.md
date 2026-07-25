@@ -1,6 +1,6 @@
 # The Loop — brief-driven delivery
 
-The Loop is the outer process: how a unit of external product intent becomes a shipped, accepted outcome. Intent enters as a **brief**; the Loop runs [Cycles](protocol.md) against it; cycles touch holons. The Loop owns what happens around cycles — ingestion, routing, gating, acceptance. Everything inside a cycle belongs to the Cycle protocol and is not respecified here.
+The Loop is the outer process: how a unit of external product intent becomes a shipped, accepted outcome. Intent enters as a **brief**; the Loop runs [Cycles](cycle.md) against it; cycles touch holons. The Loop owns what happens around cycles — ingestion, routing, gating, acceptance. Everything inside a cycle belongs to the Cycle protocol and is not respecified here.
 
 ## The brief
 
@@ -44,7 +44,7 @@ The holon-index query ([conventions.md](conventions.md), "Indexing") maps the br
 
 ### Build
 
-A sequence of cycles serving the brief, run per [protocol.md](protocol.md), one at a time. Each cycle's logbook entry records the brief it serves, so traceability runs brief → cycles → commits.
+A sequence of cycles serving the brief, run per [cycle.md](cycle.md), one at a time. Each cycle's logbook entry records the brief it serves, so traceability runs brief → cycles → commits.
 
 ### Gate
 

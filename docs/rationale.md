@@ -28,7 +28,7 @@ One program, four layers:
 A small set of hard rules (12-factor style) defining what a holon is and what may depend on what. Every rule is a claim that can break in practice; breaking one is a finding, not a failure. The rules live in [the canon](canon.md).
 
 ### 2. The Cycle — how sessions run
-Steady state, maintained **by convention, not by orchestrator**: evals first, red outranks new work (R7). Renegotiation is a success outcome (R6) — the upward channel that prevents perfectly executed wrong specs — and deletion is a first-class cycle type. The per-session protocol lives in [protocol.md](protocol.md).
+Steady state, maintained **by convention, not by orchestrator**: evals first, red outranks new work (R7). Renegotiation is a success outcome (R6) — the upward channel that prevents perfectly executed wrong specs — and deletion is a first-class cycle type. The per-session protocol lives in [cycle.md](cycle.md).
 
 ### 3. The Loop — how briefs run
 Git already keeps most of the delivery log — approvals, implementations, logbook entries — but the first event, the product intent itself, lived in an external tool. The **brief** is that missing first event: a frozen, verbatim snapshot of the issue or request, appended to `docs/briefs/` before work begins. With it the record is complete, and replayability becomes the regeneration bet one level up: implementations regenerate from bundles; bundles regenerate from the brief log plus recorded decisions. The brief is also the terminus of the renegotiation channel — a renegotiation that escalates past the root holon means the brief itself is wrong (**blocked**), and resolution is a new brief. The outer process lives in [loop.md](loop.md).

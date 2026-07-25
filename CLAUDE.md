@@ -5,7 +5,7 @@ This repo runs under the HAL canon: `docs/canon.md`. Read it once per session; t
 Two processes govern all work:
 
 - **The Loop** (`docs/loop.md`) — brief-level: external product intent enters as a brief, cycles build against it, a human accepts the outcome.
-- **The Cycle** (`docs/protocol.md`) — session-level: the protocol for running cycles. Read it and follow it every session.
+- **The Cycle** (`docs/cycle.md`) — session-level: the protocol for running cycles. Read it and follow it every session.
 
 ## Conventions
 
