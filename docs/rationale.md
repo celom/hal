@@ -22,20 +22,23 @@ The unit is the **holon** (Koestler): simultaneously a whole to its parts and a 
 
 ## The Design
 
-One program, three layers:
+One program, four layers:
 
 ### 1. The Canon — a falsifiable rule set
 A small set of hard rules (12-factor style) defining what a holon is and what may depend on what. Every rule is a claim that can break in practice; breaking one is a finding, not a failure. The rules live in [the canon](canon.md).
 
-### 2. The Loop — how cycles run
-Steady state, maintained **by convention, not by orchestrator**: evals first, red outranks new work (R7). Renegotiation is a success outcome (R6) — the upward channel that prevents perfectly executed wrong specs — and deletion is a first-class cycle type. The per-session protocol lives in [CLAUDE.md](../CLAUDE.md).
+### 2. The Cycle — how sessions run
+Steady state, maintained **by convention, not by orchestrator**: evals first, red outranks new work (R7). Renegotiation is a success outcome (R6) — the upward channel that prevents perfectly executed wrong specs — and deletion is a first-class cycle type. The per-session protocol lives in [protocol.md](protocol.md).
 
-### 3. The Lab — how we learn
-Instruments woven into real work: a cycle logbook, a seam census (where do failures actually live?), and disposability drills (regenerate a stable holon blind; did evals catch what broke?). The logbook is the deliverable that makes HAL research rather than vibes.
+### 3. The Loop — how briefs run
+Git already keeps most of the delivery log — approvals, implementations, logbook entries — but the first event, the product intent itself, lived in an external tool. The **brief** is that missing first event: a frozen, verbatim snapshot of the issue or request, appended to `docs/briefs/` before work begins. With it the record is complete, and replayability becomes the regeneration bet one level up: implementations regenerate from bundles; bundles regenerate from the brief log plus recorded decisions. The brief is also the terminus of the renegotiation channel — a renegotiation that escalates past the root holon means the brief itself is wrong (**blocked**), and resolution is a new brief. The outer process lives in [loop.md](loop.md).
+
+### 4. The Lab — how we learn
+Instruments woven into real work: a cycle logbook, a seam census (where do failures actually live?), disposability drills (regenerate a stable holon blind; did evals catch what broke?), and replay drills (rebuild from a prefix of the brief log; how much of the product lives in the record?). The logbook is the deliverable that makes HAL research rather than vibes.
 
 Dev-time units, runtime-agnostic: holons are units of *regeneration*, not deployment. Distribution would contaminate the experiment with noise (partial failure, in-flight versioning) unrelated to the hypothesis. Replaceability is a property of contract discipline, not network topology; extraction to services later is mechanical if the discipline holds.
 
-### The Loop, drawn
+### The Cycle, drawn
 
 ```mermaid
 flowchart LR
@@ -59,6 +62,7 @@ flowchart LR
 1. **Seam census** (from R9's failure-location field): the running ratio of failures at seams vs inside holons vs eval-escapes. Every componentized paradigm — objects, SOA, microservices — nailed the unit and died at the seams. If most failures are seam failures, unit evals are theater and HAL must become seam-first.
 2. **Disposability drill**: periodically pick a stable holon and regenerate it blind from its bundle alone. Diff behavior. Anything broken that evals didn't catch is a measured eval-escape. Over time this traces the **disposability threshold** — the eval-coverage level above which regeneration is safe. The single most publishable finding available.
 3. **Cycle accounting**: per cycle, time spent authoring durable parts vs implementing, and approval time. This prices the methodology's overhead honestly.
+4. **Replay drill**: replay a prefix of the brief log blind and diff the resulting durable layer against the original. The diff measures how much of the outcome is carried by the log versus by the agent. Model and agent drift between the original run and the replay is part of what the drill measures, not a defect of it.
 
 ## The Case
 
@@ -77,6 +81,7 @@ flowchart LR
 - [ ] **Renegotiation rate is moderate.** Near-zero means evals are too loose to notice wrong specs; dominant means autonomy is dead and the human is a full-time judge. → *Test: outcome ratios in the logbook.*
 - [ ] **A workable context budget B exists and is discoverable.** → *Test: record tokens actually consumed per cycle vs declared B; adjust.*
 - [ ] **Composition evals at parent grain catch most seam failures.** → *Test: seam census — escapes that composition evals missed.*
+- [ ] **Replaying a brief prefix yields an eval-equivalent durable layer.** If most of the outcome lives in the agent rather than the log, the record is not the product's source of truth. → *Test: replay drills.*
 
 ### Might be true (defer)
 - [ ] Prescribed context manifests beat free exploration on cycle success and cost (A/B on same holons — deferred).
@@ -98,7 +103,7 @@ If the first drill regenerates a holon and nothing outside the evals' coverage b
 - **Orchestrator / CLI / framework code** — R10. A tool built before its rule is understood automates a misunderstanding.
 - **Runtime service topology** — distribution noise (partial failure, versioning in flight) would contaminate the experiment. Replaceability is contract discipline; extraction later is mechanical.
 - **Retrofit / legacy story** — greenfield lab first. Retrofitting is a different (bigger) product with its own research questions.
-- **Multi-agent parallel cycles** — confounds every measurement. One cycle at a time until a baseline exists.
+- **Multi-agent parallel cycles** — confounds every measurement, and the constraint is now load-bearing, not just hygiene: replay is defined over the totally ordered log, and parallel cycles would turn it into a DAG needing a serialization rule. One cycle at a time.
 - **Context-manifest A/B** — a real experiment, but it adds authoring overhead before the basics are proven. Revisit after ~30 cycles.
 - **Registry / marketplace of holons** — the 10x horizon that makes the methodology matter beyond one repo. Named, parked.
 - **Community / adoption push** — evidence first, evangelism later. 12-factor was distilled from lived practice at Heroku, not announced ahead of it.
