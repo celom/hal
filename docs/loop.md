@@ -16,7 +16,7 @@ A brief contains:
 
 Every unit of external intent enters as a brief, uniformly: a one-line bugfix and a major feature take the same path (R11), so ingestion ceremony is near-zero for small briefs.
 
-Briefs are durable-layer material: agent-drafted at ingestion, landed by a human `approve:` commit (R8/D2). Status is never declared in-file; it derives from git ([briefs/README.md](briefs/README.md)).
+Briefs are durable-layer material: agent-drafted at ingestion, landed by a human `approve:` commit (R8). Status is never declared in-file; it derives from git ([briefs/README.md](briefs/README.md)).
 
 ## Lifecycle
 

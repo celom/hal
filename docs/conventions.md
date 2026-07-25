@@ -57,7 +57,7 @@ budget: 50000
 ```
 
 - **`summary` is routing metadata, not documentation.** The test: an agent deciding whether this holon is relevant to a task must be able to decide from this line alone. Hard cap: one line, ≤120 characters. If it wants to grow, the growth belongs in the INTENT body.
-- **No `name`, no `parent`, no `status` field — all derived.** Name = the package name; parent = the name minus its final segment (`auth-tokens-refresh` → `auth-tokens`); status = git (approved iff the file's last change landed in an `approve:` commit — D2). Declaring any of them in frontmatter would create a second source of truth that can drift.
+- **No `name`, no `parent`, no `status` field — all derived.** Name = the package name; parent = the name minus its final segment (`auth-tokens-refresh` → `auth-tokens`); status = git (approved iff the file's last change landed in an `approve:` commit — R8). Declaring any of them in frontmatter would create a second source of truth that can drift.
 - Frontmatter is part of `INTENT.md`, hence **durable**: it changes only via `approve:` commits, with the rest of the file.
 
 ### The index is a query, not a file
@@ -67,7 +67,7 @@ The catalog is never materialized — deriving it is one command, so a stored co
 ```sh
 rg '^summary:' --no-heading -g 'INTENT.md' packages/
 # path gives the holon name; parent = name minus its final segment;
-# status comes from git (approve: commits — D2)
+# status comes from git (approve: commits — R8)
 ```
 
 - **Fresh by construction.** No refresh ritual, nothing that can disagree with the INTENT files — the query output *is* the index.

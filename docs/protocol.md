@@ -1,11 +1,35 @@
 # The Cycle — per-session protocol
 
-The Cycle is the atomic unit of work: one holon, one task. Most cycles serve a brief; fix, drill, and deletion-review cycles may be internally triggered. A session is a sequence of cycles run under this protocol, inside [the Loop](loop.md). The canon ([canon.md](canon.md)) wins on any conflict.
+A cycle is the atomic unit of work: one holon, one task. This document is the protocol for running one. A session is a sequence of cycles run inside [the Loop](loop.md); most cycles serve a brief, while fix, drill, and deletion-review cycles may be internally triggered. Cycles run strictly one at a time — never in parallel — because replay is defined over the total order of cycles. Each new cycle re-enters this protocol from the top. The canon ([canon.md](canon.md)) wins on any conflict with this document.
 
-1. **Start by running the full eval suite** (the workspace `evals` target). Any red eval outranks new intent work (R7). A red eval *is* your task until green or renegotiated.
-2. **One cycle at a time.** A cycle = one holon + one task ([loop.md](loop.md)). Every cycle re-enters this protocol at step 1. No parallel cycles — replay is defined over the total order of cycles.
-3. **Valid outcomes (R6):** (a) an implementation passing evals, or (b) a **renegotiation** — a proposed change to the holon's own `INTENT.md`/`contract.ts`/`evals/` with rationale, escalated to the parent. Deletion-review cycles may additionally end in a deletion proposal. "The spec is wrong" is a success outcome — say so instead of implementing around it.
-4. **Context discipline (R4/D1):** load only the holon's bundle + its implementation + its direct dependencies' `contract.ts`. Budget: 50k tokens. If the task doesn't fit, the correct output is a split proposal, not a bigger context.
-5. **Dependencies (R2):** import only from other holons' `contract.ts`. If you find yourself needing another holon's `src/` to make progress, that is a **seam finding** — log it in the logbook entry; the contract was insufficient.
-6. **Approval (R8/D2):** durable files are drafted by you, approved by the human — a durable file is approved iff its last change landed in an `approve:` commit, draft otherwise; status is never declared in the file. Never author an `approve:` commit — those are human-only. Implementation lands as `cycle(NNNN): <summary>` only when evals are green.
-7. **Close the cycle (R9):** draft the logbook entry — copy `logbook/TEMPLATE.md` to `logbook/NNNN-<slug>.md`, next number in sequence. Record the brief the cycle serves (`n/a` for internally triggered cycles) — traceability runs brief → cycles → commits. A cycle is not done until logged. Fill the failure-location and accounting fields honestly; they are the experiment.
+The protocol has five phases, in execution order: open, load, work, land, close.
+
+## 1. Open: run the evals
+
+Run the full eval suite — the workspace `evals` target. Any red eval outranks new intent work (R7). A red eval *is* your task until it is green or renegotiated; only with a green suite do you proceed to the task you arrived with.
+
+## 2. Load: context discipline
+
+Load only the holon's bundle (`INTENT.md`, `contract.ts`, `evals/`), its implementation, and its direct dependencies' `contract.ts` files. The budget is 50k tokens (R5). If the task does not fit in that budget, the correct output of the cycle is a split proposal — not a bigger context.
+
+## 3. Work: the dependency rule
+
+Import only from other holons' `contract.ts` (R2). If making progress requires reading another holon's `src/`, that is a **seam finding**: the contract was insufficient. Record it in the logbook entry at close.
+
+Every cycle ends in one of the valid outcomes (R6):
+
+- **(a) Implementation** — code passing evals.
+- **(b) Renegotiation** — a proposed change to the holon's own `INTENT.md`, `contract.ts`, or `evals/`, with rationale, escalated to the parent.
+- **(c) Deletion proposal** — deletion-review cycles only.
+
+Discovering that the spec is wrong is a success outcome. Say so — outcome (b) — instead of implementing around it.
+
+## 4. Land: approval and commits
+
+Durable files are drafted by an agent and approved by the human (R8). A durable file is approved iff its last change landed in an `approve:` commit, and draft otherwise; status is never declared in the file. Never author an `approve:` commit — those are human-only.
+
+Implementation lands as `cycle(NNNN): <summary>`, and only when evals are green.
+
+## 5. Close: log the cycle
+
+A cycle is not done until logged (R9). Copy [logbook/TEMPLATE.md](logbook/TEMPLATE.md) to `logbook/NNNN-<slug>.md`, next number in sequence. Record the brief the cycle serves — `n/a` for internally triggered cycles — so traceability runs brief → cycles → commits. Fill the failure-location and accounting fields honestly; they are the experiment.
