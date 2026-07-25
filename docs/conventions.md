@@ -72,12 +72,12 @@ rg '^summary:' --no-heading -g 'INTENT.md' packages/
 
 - **Fresh by construction.** No refresh ritual, nothing that can disagree with the INTENT files — the query output *is* the index.
 - **R10 discipline:** when the query outgrows a one-liner (parent columns, orphan detection), it becomes a small script run on demand — still no stored artifact. Materialize a file only when reading the durable layer live becomes a *measured* context or cost problem.
-- **Orphan detection (R7)** is the same posture: a query run at cycle close (which holon names appear in no parent's children?); findings go into the notebook entry, not a stored file.
+- **Orphan detection (R7)** is the same posture: a query run at cycle close (which holon names appear in no parent's children?); findings go into the logbook entry, not a stored file.
 
 ### Use in the Loop
 
 - Run the index query at session start to route the task to a holon; its output counts toward the context budget (it should cost ~1% of B).
-- **Routing failures are findings.** If a task is routed to the wrong holon *from the index output alone*, record it in the cycle's notebook entry. If these accumulate, that is evidence the failure-location taxonomy (in-holon | seam | eval-escape) needs a fourth category — an R9 revision with citations.
+- **Routing failures are findings.** If a task is routed to the wrong holon *from the index output alone*, record it in the cycle's logbook entry. If these accumulate, that is evidence the failure-location taxonomy (in-holon | seam | eval-escape) needs a fourth category — an R9 revision with citations.
 
 ## Boundaries (R2 enforcement)
 

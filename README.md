@@ -15,6 +15,6 @@ The unit is the **holon** — simultaneously a whole to its parts and a part to 
 
 - **The Canon** — a falsifiable [rule set](docs/canon.md). Every rule is a claim that can break in practice; breaking one is a finding, not a failure.
 - **The Loop** — the per-session protocol in [CLAUDE.md](CLAUDE.md): evals first, one cycle at a time, renegotiation as a success outcome, humans as reviewers rather than laborers.
-- **The Lab** — a cycle [notebook](docs/notebook/), a seam census, and disposability drills. The measurements are the deliverable; this is research, not vibes.
+- **The Lab** — a cycle [logbook](docs/logbook/), a seam census, and disposability drills. The measurements are the deliverable; this is research, not vibes.
 
 The reasoning behind the design lives in [rationale](docs/rationale.md); workspace mechanics in [conventions](docs/conventions.md); explorations beyond the base pattern in [ideas](docs/ideas/).

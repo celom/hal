@@ -4,7 +4,7 @@ Use-case exploration: each holon is created — or mandated — by developers wo
 
 ## Premise
 
-Nothing in the HAL protocol is language-bound except one artifact: `contract.ts`. The canon, the cycle loop, the approval mechanism, the notebook — all language-neutral. If the contract artifact is generalized, the entire methodology applies to a polyglot system unchanged.
+Nothing in the HAL protocol is language-bound except one artifact: `contract.ts`. The canon, the cycle loop, the approval mechanism, the logbook — all language-neutral. If the contract artifact is generalized, the entire methodology applies to a polyglot system unchanged.
 
 ## Why this strengthens the pattern
 
@@ -48,9 +48,9 @@ Where this earns its keep: cross-team systems where stack choice is already frag
 - Systems team mandates a holon in Rust or Go.
 - Product team mandates the UI holon in TypeScript.
 
-Each team owns its holon's durable layer: `INTENT.md`, contract, evals. `approve:` commits map to per-owner sign-off. The notebook is the shared cross-team record — where seam findings between teams' holons surface as data instead of Slack arguments.
+Each team owns its holon's durable layer: `INTENT.md`, contract, evals. `approve:` commits map to per-owner sign-off. The logbook is the shared cross-team record — where seam findings between teams' holons surface as data instead of Slack arguments.
 
-HAL stops being a single-repo methodology and becomes the coordination protocol between teams that delegate implementation to agents in their own stacks. The contract IDL is the treaty; the evals are the treaty's enforcement; the notebook is the diplomatic record.
+HAL stops being a single-repo methodology and becomes the coordination protocol between teams that delegate implementation to agents in their own stacks. The contract IDL is the treaty; the evals are the treaty's enforcement; the logbook is the diplomatic record.
 
 A second, agent-shaped variant: the agent itself picks the runtime best suited to each holon's task (numerics → Python, concurrency → Go, parsing → Rust). Same mechanics, choice moved from team mandate to cycle outcome. Plausible but speculative; the org-shaped case is the one with existing demand.
 
@@ -66,7 +66,7 @@ Renegotiation (R6b) escalates to the parent. A peer seam between two team-owned 
 
 Cross-team, you never watch the neighbor's evals run; you trust their green. The industry answer (Pact-style consumer-driven contracts) maps directly: the **consumer** holon authors evals against the provider's contract, and those evals run in the **provider's** loop — where R7 makes a red one outrank the provider's intent work.
 
-This gives seam findings a formal destination. Instead of logging "the contract was insufficient" in the notebook and hoping, the consumer contributes a failing eval: the complaint becomes executable, and mechanically becomes the provider's next task. A consumer eval is a renegotiation proposal in test form.
+This gives seam findings a formal destination. Instead of logging "the contract was insufficient" in the logbook and hoping, the consumer contributes a failing eval: the complaint becomes executable, and mechanically becomes the provider's next task. A consumer eval is a renegotiation proposal in test form.
 
 ## Costs
 
@@ -83,7 +83,7 @@ This gives seam findings a formal destination. Instead of logging "the contract 
 
 ## Cheapest probe
 
-Consistent with methodology-first: keep the system single-runtime except **one** holon in a second language. Run normal cycles. The notebook entries will show where the seams actually strain — contract expressiveness, eval orchestration, or context budget — before committing to an IDL migration.
+Consistent with methodology-first: keep the system single-runtime except **one** holon in a second language. Run normal cycles. The logbook entries will show where the seams actually strain — contract expressiveness, eval orchestration, or context budget — before committing to an IDL migration.
 
 The same probe can exercise both protocol mechanisms without any IDL work: designate one seam bilateral (two-key approval on its contract) and have the consumer holon author one eval that runs in the provider's loop. Both are commit-convention and file-placement changes only.
 

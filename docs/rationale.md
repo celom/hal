@@ -31,7 +31,7 @@ A small set of hard rules (12-factor style) defining what a holon is and what ma
 Steady state, maintained **by convention, not by orchestrator**: evals first, red outranks new work (R7). Renegotiation is a success outcome (R6) — the upward channel that prevents perfectly executed wrong specs — and deletion is a first-class cycle type. The per-session protocol lives in [CLAUDE.md](../CLAUDE.md).
 
 ### 3. The Lab — how we learn
-Instruments woven into real work: a cycle notebook, a seam census (where do failures actually live?), and disposability drills (regenerate a stable holon blind; did evals catch what broke?). The notebook is the deliverable that makes HAL research rather than vibes.
+Instruments woven into real work: a cycle logbook, a seam census (where do failures actually live?), and disposability drills (regenerate a stable holon blind; did evals catch what broke?). The logbook is the deliverable that makes HAL research rather than vibes.
 
 Dev-time units, runtime-agnostic: holons are units of *regeneration*, not deployment. Distribution would contaminate the experiment with noise (partial failure, in-flight versioning) unrelated to the hypothesis. Replaceability is a property of contract discipline, not network topology; extraction to services later is mechanical if the discipline holds.
 
@@ -49,7 +49,7 @@ flowchart LR
     O -->|intent is dead| A[deletion review]
     R --> H[human approves durable change]
     A --> H
-    M --> N[notebook entry]
+    M --> N[logbook entry]
     H --> N
     N --> S
 ```
@@ -74,7 +74,7 @@ flowchart LR
 - [ ] **Bundle authoring cost amortizes.** For a project that never regenerates, HAL is pure overhead vs letting agents read code. → *Test: cumulative authoring overhead vs cycles that reuse/regenerate bundles.*
 
 ### Should be true (important)
-- [ ] **Renegotiation rate is moderate.** Near-zero means evals are too loose to notice wrong specs; dominant means autonomy is dead and the human is a full-time judge. → *Test: outcome ratios in the notebook.*
+- [ ] **Renegotiation rate is moderate.** Near-zero means evals are too loose to notice wrong specs; dominant means autonomy is dead and the human is a full-time judge. → *Test: outcome ratios in the logbook.*
 - [ ] **A workable context budget B exists and is discoverable.** → *Test: record tokens actually consumed per cycle vs declared B; adjust.*
 - [ ] **Composition evals at parent grain catch most seam failures.** → *Test: seam census — escapes that composition evals missed.*
 
@@ -88,8 +88,8 @@ The MVP of a methodology is the canon plus evidence it was lived:
 
 - The canon committed.
 - A pilot chosen (see Open Questions) and decomposed via R4 cycles.
-- **First cycles logged** in the notebook, then the **first disposability drill** — riskiest assumption first.
-- Enough cycles and drills for a seam census worth citing and a canon revised with citations to notebook entries — plus an honest verdict on the bundle hypothesis.
+- **First cycles logged** in the logbook, then the **first disposability drill** — riskiest assumption first.
+- Enough cycles and drills for a seam census worth citing and a canon revised with citations to logbook entries — plus an honest verdict on the bundle hypothesis.
 
 If the first drill regenerates a holon and nothing outside the evals' coverage breaks, the core bet has its first data point. If it breaks, the escape gets logged and the eval taxonomy grows. Both outcomes are progress.
 
