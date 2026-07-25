@@ -87,7 +87,7 @@ flowchart LR
 The MVP of a methodology is the canon plus evidence it was lived:
 
 - The canon committed.
-- A pilot chosen (see Open Questions) and decomposed via R5 cycles.
+- A pilot chosen (see Open Questions) and decomposed via R4 cycles.
 - **First cycles logged** in the notebook, then the **first disposability drill** — riskiest assumption first.
 - Enough cycles and drills for a seam census worth citing and a canon revised with citations to notebook entries — plus an honest verdict on the bundle hypothesis.
 

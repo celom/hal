@@ -1,56 +1,126 @@
-# The HAL Canon
+# HAL Canon
 
-## The Prime Axiom — the durable/disposable split
+## Definitions
 
-| Layer | Contents | Owner |
-|---|---|---|
-| **Durable** | intent, contract, evals | human-owned (approved) |
-| **Disposable** | implementation | agent-owned (regenerable) |
+**Holon**: An organizational unit that is simultaneously whole (contains children) and part (contained in a parent). Holons compose recursively; each level maintains identical contract structure.
 
-A **holon** is the unit: simultaneously a whole to its parts and a part to a larger whole. Holons compose into holons; contracts exist at every level.
+**Durable layer**: Specification that persists across implementations. Comprises intent, contract, and evals. Human-approved, revision-controlled. Defines what a holon is and how correctness is verified.
 
-## Rules
+**Disposable layer**: Implementation that achieves the durable specification. Agent-authored, regenerable. Any valid replacement passing evals is equivalent.
 
-Every rule is falsifiable. Breaking one in practice is a finding, not a failure — log it, then revise.
+**Bundle**: The durable trio: INTENT + CONTRACT + EVALS. The specification and proof. Implementation is excluded.
 
-- **R1 — The bundle.** Every holon ships four parts: `INTENT` (assertions, invariants, anti-goals — written for an agent reader), `CONTRACT` (typed inputs/outputs), `EVALS` (executable acceptance — the *only* definition of done), `IMPL` (disposable). The durable trio — `INTENT` + `CONTRACT` + `EVALS` — is the **bundle**; `IMPL` is never part of it. No holon without all four.
-- **R2 — Contracts only.** A holon may depend on other holons' contracts, never their implementations.
-- **R3 — Replaceability invariant.** Any implementation that passes the holon's evals plus every ancestor's composition evals is a valid replacement. If a valid replacement breaks the system, the *evals* were wrong: fix the evals, log the escape.
-- **R4 — Context budget.** A holon must be workable within a declared token budget: bundle + implementation + direct dependencies' contracts ≤ B. Exceeding B forces a split. Size is measured in cognition, not lines.
-- **R5 — Recursive closure.** A composite holon's implementation *is* its children plus glue. Leaf cycles write code; composite cycles write child intents, contracts, and evals. Architecture emerges from the same cycle type as everything else.
-- **R6 — Valid outcomes.** A cycle returns either (a) an implementation passing evals, or (b) a **renegotiation**: a proposed change to the holon's own intent/contract/evals with rationale, escalated to the parent. Deletion-review cycles (R7) may instead return (c) a **deletion proposal**. Discovering the spec is wrong is a success outcome.
-- **R7 — Steady state by convention.** Every cycle begins by running the full eval suite. Any red eval outranks new intent work. Intents no longer referenced by any parent trigger a **deletion review** — a cycle type whose valid outcomes are deletion or a reprieve with rationale.
-- **R8 — Human as reviewer.** Humans approve changes to the durable layer; humans do not write implementations. Agents draft everything, including proposed evals; approval is the human checkpoint.
-- **R9 — The notebook.** A cycle is not closed until logged. The agent drafts the entry; entries are small and structured. Each entry records:
-  - the task, and the cycle type: **composite | leaf | fix | drill | deletion-review**;
-  - the outcome: **impl | renegotiation | deletion**;
-  - failures observed, and their location: **in-holon | seam | eval-escape** (n/a when none);
-  - accounting (context consumed, agent time, approval time).
-- **R10 — No tooling before convention.** Any tool must be preceded by the written rule it enforces, proven by manual adherence across cycles. No orchestrator until the convention has survived ~30 cycles.
+**Cycle**: An atomic unit of work: one holon operating on one task. Enters the protocol loop, executes, produces an outcome, logs itself.
 
-## Adopted Defaults (revisable with evidence)
+## Structure
 
-- **D1 — Context budget.** B = 50,000 tokens per holon. Record actual consumption per cycle; revise with data.
-- **D2 — Approval mechanics.**
-  - Durable files (`INTENT.md`, `contract.ts`, `evals/**`, this canon) change only in `approve:`-prefixed commits.
-  - `approve:` commits are authored by a human after reviewing the agent's draft; agents draft content, never `approve:` commits.
-  - A durable file's status is derived from git — approved iff its last change landed in an `approve:` commit, draft otherwise — and never declared in the file.
-  - Implementations merge on green evals in `cycle(NNNN):` commits.
-  - Repo meta-work (docs, scaffolding) is never mixed into a cycle commit.
-- **D3 — Eval execution.** Every holon exposes an `evals` target; a single workspace-level `evals` target runs all of them.
-- **D4 — Minimum eval taxonomy.** Example-based evals per holon; composition evals per composite. Measured escapes decide what further kinds (property-based, budget, behavioral) become mandatory.
+Every holon contains four required components.
 
-## Holon Anatomy (on-disk convention)
+**INTENT** (durable): Why the holon exists. Asserts invariants and anti-goals. Specifies routing summary and declared token budget. Parent and approval status are derived externally, never declared in-file.
+
+**CONTRACT** (durable): What the holon requires and provides. Typed inputs and outputs. The sole importable surface; contains no implementation details.
+
+**EVALS** (durable): Executable proof of correctness. Example-based per holon; composition evals per composite, exercising children through the parent contract.
+
+**IMPL** (disposable): How the holon operates. For leaf holons: implementation code. For composites: orchestration and glue only; children contain actual implementation.
+
+## Composition
+
+Dependency rule: Holons import only contracts from other holons, never implementations.
+
+Replaceability invariant: Any implementation passing both its own evals and all ancestor composition evals is a valid replacement. If a valid replacement breaks the system, evals were insufficient; correct the evals and log the escape.
+
+Composite structure: A composite holon's implementation comprises only its children plus glue. Architecture emerges from the same cycle mechanism as all other work.
+
+## Work Cycles
+
+A cycle begins by running the full eval suite. Red evals outrank new work.
+
+Cycle types:
+- **Leaf**: Produces implementation code
+- **Composite**: Produces child intents, contracts, evals
+- **Fix**: Corrects a specific failure
+- **Drill**: Strengthens a capability
+- **Deletion review**: Evaluates whether a holon is still needed
+
+Valid outcomes for any cycle:
+- **(a) Implementation**: Code passing evals
+- **(b) Renegotiation**: Proposed change to holon's INTENT, CONTRACT, or EVALS with rationale, escalated to parent
+- **(c) Deletion**: Holon removal (deletion-review cycles only)
+
+Discovering the specification is wrong constitutes a successful outcome.
+
+Intents with no parent references trigger deletion reviews. Outcomes are deletion or reprieve with rationale.
+
+## Capacity
+
+Each holon declares a token budget. Workable scope = bundle + implementation + direct-dependency contracts ≤ budget. Exceeding budget requires splitting.
+
+Default budget: 50,000 tokens per holon. Record consumption per cycle; revise based on evidence.
+
+## Authority
+
+Humans review and approve durable-layer changes. Humans do not write implementations.
+
+Agents draft all content: implementations, evals, and proposed changes to INTENT, CONTRACT, EVALS.
+
+Durable-layer changes occur only in `approve:`-prefixed commits, authored by humans after reviewing agent drafts. Implementations merge on green evals in `cycle(NNNN):`-prefixed commits. Meta-work uses `meta:` commits and never mixes with cycle work.
+
+Approval status derives from git: a durable file is approved iff its last change landed in an `approve:` commit. Status is never declared in-file.
+
+## Logging
+
+Each cycle is logged in a notebook entry. The agent drafts; the entry records:
+- Task and cycle type
+- Outcome
+- Failure location if present (in-holon, seam, eval-escape)
+- Accounting (context consumed, agent time, approval time)
+
+A cycle is not complete until logged.
+
+## Operational Rules
+
+**R1**: Every holon contains INTENT, CONTRACT, EVALS, and IMPL.
+
+**R2**: Holons import contracts only, never implementations.
+
+**R3**: Any implementation passing its evals and all ancestor evals is valid. Invalid replacements indicate insufficient evals.
+
+**R4**: Composite implementations contain orchestration and child composition. Architecture emerges from the same cycle mechanism as all work.
+
+**R5**: Holon scope is bounded: bundle + implementation + dependencies ≤ declared budget. Exceeding forces split.
+
+**R6**: Valid outcomes are (a) passing implementation, (b) renegotiation, or (c) deletion.
+
+**R7**: Cycles begin with full eval suite; red evals have priority. Unreferenced intents trigger deletion reviews.
+
+**R8**: Humans approve durable-layer changes. Agents draft all content.
+
+**R9**: Cycles must be logged to close.
+
+**R10**: Tooling follows convention. Manual adherence across ~30 cycles precedes automation.
+
+## On-Disk Convention
+
+Each holon occupies a directory:
 
 ```
 packages/<name>/
-  INTENT.md         # why it exists: assertions, invariants, anti-goals;
-                    # routing summary (one line); declared budget.
-                    # Parent and status are never declared — parent derives from
-                    # the name (docs/conventions.md), status from git (D2)
-  contract.ts       # durable; the ONLY importable surface: types + schemas
-  evals/            # durable; executable definition of done (target: evals)
-  src/              # disposable implementation
+  INTENT.md         Durable. Why it exists, assertions, invariants,
+                    anti-goals, routing summary, declared budget.
+  
+  contract.ts       Durable. Sole importable surface: types and
+                    schemas only.
+  
+  evals/            Durable. Executable correctness proof. Composition
+                    evals per composite.
+  
+  src/              Disposable. Implementation. For composites:
+                    orchestration and glue.
 ```
 
-A composite holon's `src/` contains only glue; its real implementation is its children (R5), and its `evals/` are composition evals exercising the children together through its own contract.
+Every holon exposes an `evals` target. Workspace-level `evals` runs all.
+
+## Revision
+
+All rules and defaults are revisable with evidence.

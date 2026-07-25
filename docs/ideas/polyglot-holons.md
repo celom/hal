@@ -38,7 +38,7 @@ Pick one convention repo-wide. The eval harness knows the convention, not the la
 
 ### Bundle: one more file
 
-The holon bundle gains a `runtime` declaration (language, build command, invocation surface). Context budget rule (R4/D1) is unchanged — the agent loads the bundle, the implementation, and dependencies' *contracts*. It never needs a dependency's language.
+The holon bundle gains a `runtime` declaration (language, build command, invocation surface). Context budget rule (R5/D1) is unchanged — the agent loads the bundle, the implementation, and dependencies' *contracts*. It never needs a dependency's language.
 
 ## The org-shaped use-case
 

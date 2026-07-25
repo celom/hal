@@ -20,7 +20,7 @@ Suggestions, not prescriptions. Layout is a team choice: pick **nested** or **fl
   ```
 
 - **Parent code stays in `src/`; child roots are siblings of `src/`**, never inside it. A directory is either a package root or a container — not ambiguously both.
-- Pros: holon co-location — a holon's bundle + `src/` + children are one path prefix, so R4 context loading is a trivial glob.
+- Pros: holon co-location — a holon's bundle + `src/` + children are one path prefix, so R5 context loading is a trivial glob.
 - Cons: nested package roots are a flaky corner of many workspace tools; needs the disjointness rule above.
 
 ## Layout option B — flat (hierarchy by naming + tags only)
@@ -35,7 +35,7 @@ Suggestions, not prescriptions. Layout is a team choice: pick **nested** or **fl
   ```
 
 - Pros: zero nesting edge cases; simplest tooling story.
-- Cons: holarchy is invisible in the filesystem — R4 bundle loading becomes a tag/name query instead of a path prefix.
+- Cons: holarchy is invisible in the filesystem — R5 bundle loading becomes a tag/name query instead of a path prefix.
 
 ## Naming (both layouts)
 
@@ -43,7 +43,7 @@ Suggestions, not prescriptions. Layout is a team choice: pick **nested** or **fl
 
 ## Indexing — the holon catalog
 
-How the system (an agent, a session, a query) discovers existing holons and their intent without walking the codebase. Two customers from the canon: routing (R4's unstated step zero — *which* holon does this task belong to?) and orphan detection (R7's deletion-review trigger is a catalog query).
+How the system (an agent, a session, a query) discovers existing holons and their intent without walking the codebase. Two customers from the canon: routing (R5's unstated step zero — *which* holon does this task belong to?) and orphan detection (R7's deletion-review trigger is a catalog query).
 
 ### Source of truth: `INTENT.md` frontmatter
 
