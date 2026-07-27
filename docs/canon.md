@@ -1,42 +1,25 @@
 # HAL Canon
 
-Rules R1–R13 are the sole normative statements; the other sections are definitions, defaults, and layout. The canon wins on any conflict with any other document.
+Rules R1–R13 are the sole normative statements; the other sections are definitions and defaults. The canon wins on any conflict with any other document.
 
 ## Definitions
 
-**Holon**: An organizational unit that is simultaneously whole (contains children) and part (contained in a parent). Holons compose recursively; each level maintains identical bundle structure.
+**Holon**: An organizational unit that is simultaneously whole (contains children) and part (contained in a parent). Holons compose recursively; every level has the same four elements.
 
-**Durable layer**: Specification that persists across implementations. Comprises INTENT, CONTRACT, and EVALS. Human-approved, revision-controlled. Defines what a holon is and how correctness is verified.
+The four elements (R1):
 
-**Disposable layer**: Implementation that achieves the durable specification. Agent-authored, regenerable. Any valid replacement passing evals is equivalent.
+- **INTENT** (durable): Why the holon exists — invariants, anti-goals, routing summary, declared token budget.
+- **CONTRACT** (durable): What the holon requires and provides — typed inputs and outputs. The sole importable surface; no implementation detail.
+- **EVALS** (durable): Executable proof of correctness. Example-based per holon; composition evals per composite validate children through the parent contract.
+- **IMPL** (disposable): How the holon operates. Leaf holons: implementation code. Composites: orchestration and glue only.
 
-**Bundle**: The durable trio: INTENT, CONTRACT, EVALS. The specification and verification. Implementation is excluded.
+**Bundle**: The durable trio — INTENT, CONTRACT, EVALS. Human-approved; defines what a holon is and how correctness is verified. The implementation is excluded: agent-authored, regenerable, and any replacement passing evals is equivalent.
 
-**Cycle**: An atomic unit of work: one holon operating on one task. Run per `cycle.md`.
+**Cycle**: The atomic unit of work — one holon, one task. Types: leaf, composite, fix, drill, deletion review. Run per `cycle.md`.
 
 **Brief**: A frozen, verbatim snapshot of one unit of external product intent, taken when work begins on it. Briefs form an append-only, sequentially numbered log; product state is the fold over the log.
 
-**Loop**: The outer delivery process. A brief enters; cycles run against it, one at a time; a human accepts the outcome or the brief blocks. Run per `loop.md`.
-
-## Holon structure
-
-The four elements of a holon (R1):
-
-**INTENT** (durable): Why the holon exists. Specifies invariants, anti-goals, routing summary, and declared token budget.
-
-**CONTRACT** (durable): What the holon requires and provides. Typed inputs and outputs. The sole importable surface; contains no implementation details.
-
-**EVALS** (durable): Executable proof of correctness. Example-based per holon; composition evals per composite validate children through the parent contract.
-
-**IMPL** (disposable): How the holon operates. For leaf holons: implementation code. For composites: orchestration and glue only; children contain actual implementation.
-
-## Cycle types
-
-- Leaf: produces implementation code
-- Composite: produces child intents, contracts, evals
-- Fix: corrects a specific failure
-- Drill: strengthens a capability
-- Deletion review: evaluates whether a holon is still needed
+**Loop**: The outer delivery process — a brief enters, cycles run against it one at a time, a human accepts the outcome or the brief blocks. Run per `loop.md`.
 
 ## Rules
 
@@ -68,28 +51,9 @@ The four elements of a holon (R1):
 
 ## Defaults
 
-Default budget: 50,000 tokens per holon (R5). Record consumption per cycle; revise based on evidence.
+Budget: 50,000 tokens per holon (R5). Record consumption per cycle; revise with evidence.
 
-## Directory Layout
-
-Each holon occupies a directory:
-
-```
-packages/<name>/
-  INTENT.md         Durable. Why it exists, assertions, invariants,
-                    anti-goals, routing summary, declared budget.
-  
-  contract.ts       Durable. Sole importable surface: types and
-                    schemas only.
-  
-  evals/            Durable. Executable correctness proof. Composition
-                    evals per composite.
-  
-  src/              Disposable. Implementation. For composites:
-                    orchestration and glue.
-```
-
-Every holon exposes an `evals` target. Workspace-level `evals` runs all.
+How the four elements map to files is workspace convention: `holons.md`.
 
 ## Replayability
 

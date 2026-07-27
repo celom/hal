@@ -15,7 +15,7 @@ The unit is the **holon** — simultaneously a whole to its parts and a part to 
 
 - **The Canon** — a falsifiable [rule set](docs/canon.md). Every rule is a claim that can break in practice; breaking one is a finding, not a failure.
 - **The Loop** — the brief-driven [outer process](docs/loop.md): external intent enters as a frozen brief in an append-only log, cycles build against it, a human accepts the outcome. The log plus git is a totally ordered record the product can be replayed from.
-- **The Cycle** — the [per-session protocol](docs/cycle.md): evals first, one cycle at a time, renegotiation as a success outcome, humans as reviewers rather than laborers.
+- **The Cycle** — the [per-cycle protocol](docs/cycle.md): evals first, one cycle at a time, renegotiation as a success outcome, humans as reviewers rather than laborers.
 - **The Lab** — a cycle [logbook](docs/logbook/), a seam census, disposability drills, and replay drills. The measurements are the deliverable; this is research, not vibes.
 
-The reasoning behind the design lives in [rationale](docs/rationale.md); the holon catalog in [indexing](docs/indexing.md); workspace layout in [conventions](docs/conventions.md); explorations beyond the base pattern in [ideas](docs/ideas/).
+The bet and the research protocol live in [rationale](docs/rationale.md); file layout and the holon catalog in [holons](docs/holons.md); the git binding in [gitflow](docs/gitflow.md); explorations beyond the base pattern in [ideas](docs/ideas/).
