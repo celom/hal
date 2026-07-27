@@ -61,4 +61,4 @@ Cycles run one at a time, so first-parent order is total.
 
 ## Enforcement
 
-Convention first (R10): manual adherence across ~30 cycles precedes automation. The eventual mechanical form is branch protection on `main` (human allowlist for durable-carrying merges) plus a merge check on cycle-branches for green evals and a committed logbook entry.
+Convention first (R10): manual adherence precedes automation; threshold per the canon's Defaults. The eventual mechanical form is branch protection on `main` (human allowlist for durable-carrying merges) plus a merge check on cycle-branches for green evals and a committed logbook entry.

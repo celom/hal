@@ -13,11 +13,13 @@ The four elements (R1):
 - **EVALS** (durable): Executable proof of correctness. Example-based per holon; composition evals per composite validate children through the parent contract.
 - **IMPL** (disposable): How the holon operates. Leaf holons: implementation code. Composites: orchestration and glue only.
 
-**Bundle**: The durable trio — INTENT, CONTRACT, EVALS. Human-approved; defines what a holon is and how correctness is verified. The implementation is excluded: agent-authored, regenerable, and any replacement passing evals is equivalent.
+**Bundle**: The durable trio — INTENT, CONTRACT, EVALS. Defines what a holon is and how correctness is verified.
 
 **Cycle**: The atomic unit of work — one holon, one task. Types: leaf, composite, fix, drill, deletion review. Run per `cycle.md`.
 
-**Brief**: A frozen, verbatim snapshot of one unit of external product intent, taken when work begins on it. Briefs form an append-only, sequentially numbered log; product state is the fold over the log.
+**Brief**: A frozen, verbatim snapshot of one unit of external product intent, taken when work begins on it. Product state is the fold over the brief log.
+
+**Eval-escape**: A failure that a passing eval suite did not catch.
 
 **Loop**: The outer delivery process — a brief enters, cycles run against it one at a time, a human accepts the outcome or the brief blocks. Run per `loop.md`.
 
@@ -41,7 +43,7 @@ The four elements (R1):
 
 **R9**: Cycles must be logged to close. The entry follows `logbook/TEMPLATE.md`.
 
-**R10**: Tooling follows convention. Manual adherence across ~30 cycles precedes automation.
+**R10**: Tooling follows convention. Manual adherence precedes automation; threshold per Defaults.
 
 **R11**: Every unit of external intent enters as a brief in `docs/briefs/`, numbered sequentially; the source tool is never the canonical record. Briefs are frozen at ingestion; the log is append-only. Change requests are new briefs.
 
@@ -53,7 +55,9 @@ The four elements (R1):
 
 Budget: 50,000 tokens per holon (R5). Record consumption per cycle; revise with evidence.
 
-How the four elements map to files is workspace convention: `holons.md`.
+Automation threshold: ~30 manual cycles (R10); revise with evidence.
+
+How the four elements map to files (convention) and the catalog format (binding) are defined in `holons.md`.
 
 ## Replayability
 

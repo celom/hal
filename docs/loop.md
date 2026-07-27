@@ -8,7 +8,7 @@ A brief snapshots one external item — an issue, feature request, or change req
 
 One file per brief: `docs/briefs/NNNN-<slug>.md`, copied from [briefs/TEMPLATE.md](briefs/TEMPLATE.md). It records the source, the content verbatim, and acceptance criteria — verbatim when the source has them, drafted at ingestion otherwise.
 
-A one-line bugfix and a major feature take the same path, so ingestion ceremony is near-zero for small briefs. Briefs are agent-drafted and appended directly to the trunk — recording intent, not changing specification, so no human act precedes work (the R8 exemption).
+Every brief takes the same path regardless of size. Briefs are agent-drafted and appended directly to the trunk — recording intent, not changing specification (the R8 exemption).
 
 ## Lifecycle
 
@@ -47,4 +47,4 @@ The brief is the terminus of the renegotiation chain (R6): a renegotiation escal
 
 ## Replayability
 
-The brief log plus git history is the totally ordered record the product replays from (canon, "Replayability"; order: [gitflow](gitflow.md)). This is the regeneration bet one level up: implementations regenerate from bundles; bundles regenerate from the brief log plus recorded decisions. It requires every choice point to be in the record, and it makes single-threaded cycles load-bearing — parallel cycles would turn the record into a DAG needing a serialization rule. The instrument is the replay drill ([rationale](rationale.md)).
+The brief log plus git history is the totally ordered record the product replays from (canon, "Replayability"; order: [gitflow](gitflow.md)). The justification and the replay drill are in [rationale](rationale.md).

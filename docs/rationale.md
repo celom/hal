@@ -23,6 +23,8 @@ The novel composite: **enforceable context budgets + regeneration invariant + st
 3. **Cycle accounting**: per cycle, time authoring durable parts vs implementing, and approval time. Prices the methodology's overhead honestly.
 4. **Replay drill**: replay a prefix of the brief log blind and diff the resulting durable layer against the original. The diff measures how much of the outcome is carried by the log versus by the agent. Model and agent drift between runs is part of what the drill measures, not a defect of it.
 
+Replay is the regeneration bet one level up: implementations regenerate from bundles; bundles regenerate from the brief log plus recorded decisions. This requires every choice point to be in the record, and it makes single-threaded cycles load-bearing — parallel cycles would turn the record into a DAG needing a serialization rule.
+
 ## Assumptions to validate
 
 ### Must be true (dealbreakers)
@@ -45,7 +47,7 @@ The novel composite: **enforceable context budgets + regeneration invariant + st
 
 ## Milestones
 
-The MVP of a methodology is the canon plus evidence it was lived: the canon committed; a pilot chosen and decomposed via R4 cycles; first cycles logged, then the first disposability drill — riskiest assumption first; enough cycles and drills for a seam census worth citing and a canon revised with citations to logbook entries.
+The MVP of a methodology is the canon plus evidence it was lived. In order: commit the canon; choose a pilot and decompose it via R4 cycles; log the first cycles, then run the first disposability drill — riskiest assumption first. The endpoint is enough cycles and drills for a seam census worth citing, and a canon revised with citations to logbook entries.
 
 If the first drill regenerates a holon and nothing outside eval coverage breaks, the core bet has its first data point. If it breaks, the escape gets logged and the eval taxonomy grows. Both outcomes are progress.
 
@@ -53,4 +55,4 @@ If the first drill regenerates a holon and nothing outside eval coverage breaks,
 ## Open questions
 
 1. **The pilot project** — the one genuinely open decision. Criteria: real stakes, expected requirements churn (stresses R6), enough seams for a meaningful census (UI + API + persistence + one external integration), small enough for one human plus agents.
-2. **When does automation start?** R10 says ~30 cycles. Is N=30 right, or should automation wait for a stable escape rate instead of a cycle count?
+2. **When does automation start?** R10 defers the threshold to the canon's Defaults, currently a cycle count. Is a fixed count right, or should automation wait for a stable escape rate instead?
