@@ -57,8 +57,8 @@ budget: 50000
 ```
 
 - **`summary` is routing metadata, not documentation.** The test: an agent deciding whether this holon is relevant to a task must be able to decide from this line alone. Hard cap: one line, ≤120 characters. If it wants to grow, the growth belongs in the INTENT body.
-- **No `name`, no `parent`, no `status` field — all derived.** Name = the package name; parent = the name minus its final segment (`auth-tokens-refresh` → `auth-tokens`); status = git (approved iff the content is on `main`, reached through a human merge — R8). Declaring any of them in frontmatter would create a second source of truth that can drift.
-- Frontmatter is part of `INTENT.md`, hence **durable**: it reaches `main` only through a human-merged brief-branch, with the rest of the file.
+- **No `name`, no `parent`, no `status` field — all derived.** Name = the package name; parent = the name minus its final segment (`auth-tokens-refresh` → `auth-tokens`); status = git (approved iff on `main` — R8, [gitflow.md](gitflow.md)). Declaring any of them in frontmatter would create a second source of truth that can drift.
+- Frontmatter is part of `INTENT.md`, hence **durable**: it changes only through the git flow, with the rest of the file.
 
 ### The index is a query, not a file
 

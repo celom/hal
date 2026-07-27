@@ -20,5 +20,5 @@ Address the user in the functional style:
 
 ## Conventions
 
-- Git flow: trunk-based. `brief/NNNN-<slug>` off `main`, one per brief; `cycle/NNNN-<slug>` off the brief-branch, one per cycle. Cycle-branches merge mechanically on green evals with the cycle logged; brief-branches merge into `main` by the human only — the merge is the acceptance. Never merge into `main`.
+- Git flow: `docs/gitflow.md` binds approval and status to git — trunk-based, one branch per brief and per cycle, merge = approval. Never merge a brief-branch or durable changes into `main`; those merges are human-only.
 - Commits: `brief(NNNN):` (ingestion, on `main`) · `cycle(NNNN):` (cycle-branch work) · `meta:` (docs/scaffolding, never mixed with cycle work).

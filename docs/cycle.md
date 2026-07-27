@@ -24,11 +24,11 @@ Every cycle ends in one of the valid outcomes (R6):
 
 Discovering that the spec is wrong is a success outcome. Say so — outcome (b) — instead of implementing around it.
 
-## 4. Land: branches and merges
+## 4. Land: merge per the git flow
 
-A cycle runs on its own branch: `cycle/NNNN-<slug>`, NNNN the cycle's logbook number, off the brief-branch — off `main` for internally triggered cycles. Commits on it use `cycle(NNNN):`.
+A cycle runs on its own cycle-branch and lands by merging it, per [gitflow.md](gitflow.md): mechanically, once evals are green and the logbook entry (§5) is committed on the branch — the merge is the cycle's approval.
 
-Merging the cycle-branch is the cycle's approval and its last act: merge mechanically once evals are green and the logbook entry (§5) is committed on the branch. Durable files are drafted by agents and approved by a human merge into `main` (R8); a durable file is approved iff its content is on `main`, and draft otherwise. Never merge into `main` — those merges are human-only. An internally triggered cycle that changed durable files therefore also waits for a human merge.
+Durable files are drafted by agents and approved by a human merge into the trunk (R8). Never merge a brief-branch or durable changes into the trunk — those merges are human-only. The one trunk merge that is yours: an internally triggered cycle that touched nothing durable.
 
 ## 5. Close: log the cycle
 

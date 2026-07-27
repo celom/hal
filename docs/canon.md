@@ -62,7 +62,7 @@ The log is append-only. A brief is frozen at ingestion. A change request against
 
 A brief records its source, the source content verbatim, and acceptance criteria — verbatim from the source when present, drafted at ingestion otherwise. Ingestion is uniform across sizes.
 
-Briefs are agent-drafted at ingestion and appended to the log by a `brief(NNNN):` commit on `main`; ingestion also creates the brief-branch. Status derives from branch state, never declared in-file.
+Briefs are agent-drafted at ingestion and appended directly to the trunk; ingestion also spawns the brief-branch (`gitflow.md`). Status derives from git, never declared in-file.
 
 ## Resource Constraints
 
@@ -72,21 +72,9 @@ Default budget: 50,000 tokens per holon. Record consumption per cycle; revise ba
 
 ## Governance
 
-**Authority**: Humans review and approve all durable-layer changes; the review happens at merge. Agents draft all content: implementations, evals, and proposed changes to INTENT, CONTRACT, EVALS. Humans do not write implementations.
+**Authority**: Agents draft all content: implementations, evals, and proposed changes to INTENT, CONTRACT, EVALS. Humans review and approve all durable-layer changes; the review happens at merge. Humans do not write implementations.
 
-**Git flow** (trunk-based):
-- `main` is the trunk. Durable content is approved iff it is on `main`.
-- `brief/NNNN-<slug>`: one branch per brief, created off `main` at ingestion. A human merges it into `main`; the merge is the acceptance of the brief and the approval of every durable change it carries. Only humans merge into `main`.
-- `cycle/NNNN-<slug>`: one branch per cycle, created off the brief-branch. It merges back mechanically — no human act — when evals are green and the cycle is logged; the merge is the cycle's approval.
-- Internally triggered cycles (fix, drill, deletion review) branch off `main`. They merge mechanically when they touch only the disposable layer; a merge carrying durable changes is performed by a human.
-- The brief log is exempt from the merge rule: a brief records external intent verbatim, so appending one is recording, not specification change, and lands directly on `main`.
-
-**Commit prefixes**:
-- `brief(NNNN):` — ingestion, appends a brief to the log on `main`
-- `cycle(NNNN):` — work on a cycle-branch
-- `meta:` — docs and scaffolding, never mixed with cycle work
-
-**Status**: Derives from branch topology, never declared in-file. A brief is building while its branch is unmerged, accepted when merged, blocked when its branch head is tagged `blocked/NNNN-<slug>`. A cycle is approved when its branch is merged.
+**Recording**: Approval, acceptance, and status are recorded in git, never declared in-file. The binding — trunk, branches, merges, tags, commit prefixes, status derivation — is `gitflow.md`.
 
 ## Logging
 
@@ -134,7 +122,7 @@ Every holon exposes an `evals` target. Workspace-level `evals` runs all.
 
 **R7**: Cycles begin with full eval suite; red evals have priority. Unreferenced intents trigger deletion reviews.
 
-**R8**: Agents draft all content. Durable-layer changes reach `main` only through a merge performed by a human; the merge is the approval. Brief-log appends are exempt.
+**R8**: Agents draft all content. A durable-layer change is approved only by a human-performed merge into the trunk (`gitflow.md`); the merge is the approval. Brief-log appends are exempt.
 
 **R9**: Cycles must be logged to close.
 
@@ -142,11 +130,11 @@ Every holon exposes an `evals` target. Workspace-level `evals` runs all.
 
 **R11**: Every unit of external intent enters as a brief. Briefs are frozen at ingestion; the log is append-only. Change requests are new briefs.
 
-**R12**: A brief closes only by a human merging its brief-branch into `main`, with all spawned cycles logged. A renegotiation escalating past the root holon blocks the brief: its branch head is tagged `blocked/NNNN-<slug>` and never merges; resolution is a new brief.
+**R12**: A brief closes only by a human merging its brief-branch into the trunk, with all spawned cycles logged. A renegotiation escalating past the root holon blocks the brief; a blocked brief never merges, and resolution is a new brief.
 
 ## Replayability
 
-The brief log, the merge history, and the logbook form a totally ordered record: first-parent order on `main` gives the brief order; first-parent order on each brief-branch gives its cycle order. Replaying briefs 0001..n from this record yields a durable layer in the same eval-equivalence class. Cycles run one at a time; the total order makes replay well-defined.
+The brief log, the merge history, and the logbook form a totally ordered record; the order is defined in `gitflow.md`. Replaying briefs 0001..n from this record yields a durable layer in the same eval-equivalence class. Cycles run one at a time; the total order makes replay well-defined.
 
 ## Revisability
 
