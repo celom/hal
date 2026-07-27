@@ -1,146 +1,67 @@
 # HAL Canon
 
-## Core Concepts
+Rules R1–R13 are the sole normative statements; the other sections are definitions and defaults. The canon wins on any conflict with any other document.
 
-**Holon**: An organizational unit that is simultaneously whole (contains children) and part (contained in a parent). Holons compose recursively; each level maintains identical bundle structure.
+## Definitions
 
-**Durable layer**: Specification that persists across implementations. Comprises INTENT, CONTRACT, and EVALS. Human-approved, revision-controlled. Defines what a holon is and how correctness is verified.
+**Holon**: An organizational unit that is simultaneously whole (contains children) and part (contained in a parent). Holons compose recursively; every level has the same four elements.
 
-**Disposable layer**: Implementation that achieves the durable specification. Agent-authored, regenerable. Any valid replacement passing evals is equivalent.
+The four elements (R1):
 
-**Bundle**: The durable trio: INTENT, CONTRACT, EVALS. The specification and verification. Implementation is excluded.
+- **INTENT** (durable): Why the holon exists — invariants, anti-goals, routing summary, declared token budget.
+- **CONTRACT** (durable): What the holon requires and provides — typed inputs and outputs. The sole importable surface; no implementation detail.
+- **EVALS** (durable): Executable proof of correctness. Example-based per holon; composition evals per composite validate children through the parent contract.
+- **IMPL** (disposable): How the holon operates. Leaf holons: implementation code. Composites: orchestration and glue only.
 
-**Cycle**: An atomic unit of work: one holon operating on one task. Begins by running full evals, executes toward an outcome, and logs its development process.
+**Bundle**: The durable trio — INTENT, CONTRACT, EVALS. Defines what a holon is and how correctness is verified.
 
-**Brief**: A frozen, verbatim snapshot of one unit of external product intent, taken when work begins on it. Briefs form an append-only, sequentially numbered log; product state is the fold over the log.
+**Cycle**: The atomic unit of work — one holon, one task. Types: leaf, composite, fix, drill, deletion review. Run per `cycle.md`.
 
-**Loop**: The outer delivery process. A brief enters; cycles run against it, one at a time; a human accepts the outcome or the brief blocks.
+**Brief**: A frozen, verbatim snapshot of one unit of external product intent, taken when work begins on it. Product state is the fold over the brief log.
 
-## Component Structure
+**Eval-escape**: A failure that a passing eval suite did not catch.
 
-Every holon contains four required components:
+**Loop**: The outer delivery process — a brief enters, cycles run against it one at a time, a human accepts the outcome or the brief blocks. Run per `loop.md`.
 
-**INTENT** (durable): Why the holon exists. Specifies invariants, anti-goals, routing summary, and declared token budget. Parent and approval status are derived externally, never declared in-file.
-
-**CONTRACT** (durable): What the holon requires and provides. Typed inputs and outputs. The sole importable surface; contains no implementation details.
-
-**EVALS** (durable): Executable proof of correctness. Example-based per holon; composition evals per composite validate children through the parent contract.
-
-**IMPL** (disposable): How the holon operates. For leaf holons: implementation code. For composites: orchestration and glue only; children contain actual implementation.
-
-## Composition
-
-**Dependency rule**: Holons import only contracts from other holons, never implementations.
-
-**Replaceability invariant**: Any implementation passing both its own evals and all ancestor composition evals is a valid replacement. If a valid replacement breaks the system, evals were insufficient; correct the evals and log the escape.
-
-**Composite structure**: A composite holon's implementation comprises only its children plus glue. Architecture emerges from the same cycle mechanism as all other work.
-
-## Cycles
-
-A cycle begins by running the full eval suite. Red evals outrank new work.
-
-**Cycle types**:
-- Leaf: Produces implementation code
-- Composite: Produces child intents, contracts, evals
-- Fix: Corrects a specific failure
-- Drill: Strengthens a capability
-- Deletion review: Evaluates whether a holon is still needed
-
-**Valid outcomes**:
-- (a) Implementation: Code passing evals
-- (b) Renegotiation: Proposed change to holon's INTENT, CONTRACT, or EVALS with rationale, escalated to parent
-- (c) Deletion: Holon removal (deletion-review cycles only)
-
-Discovering the specification is wrong constitutes a successful outcome. Intents with no parent references trigger deletion reviews; outcomes are deletion or reprieve with rationale.
-
-## Briefs
-
-Every unit of external intent — issue, feature request, change request — enters as a brief in `docs/briefs/NNNN-<slug>.md`, numbered sequentially. The source tool is never the canonical record.
-
-The log is append-only. A brief is frozen at ingestion. A change request against shipped work is a new brief.
-
-A brief records its source, the source content verbatim, and acceptance criteria — verbatim from the source when present, drafted at ingestion otherwise. Ingestion is uniform across sizes.
-
-Briefs are durable-layer files: agent-drafted, landed by `approve:` commits. Status derives from git, never declared in-file.
-
-## Resource Constraints
-
-Each holon declares a token budget. Workable scope = bundle + implementation + direct-dependency contracts ≤ budget. Exceeding budget requires splitting.
-
-Default budget: 50,000 tokens per holon. Record consumption per cycle; revise based on evidence.
-
-## Governance
-
-**Authority**: Humans review and approve all durable-layer changes. Agents draft all content: implementations, evals, and proposed changes to INTENT, CONTRACT, EVALS. Humans do not write implementations.
-
-**Git conventions**:
-- `approve:` commits: durable-layer changes, authored by humans after reviewing agent drafts
-- `accept(NNNN):` commits: brief closure, authored by humans after judging the outcome against the brief's acceptance criteria
-- `cycle(NNNN):` commits: implementations that merge on green evals
-- `meta:` commits: docs and scaffolding, never mixed with cycle work
-
-**Approval status**: Derives from git. A durable file is approved iff its last change landed in an `approve:` commit. Status is never declared in-file.
-
-## Logging
-
-Each cycle must be logged in a logbook entry to close. The agent drafts; the entry records:
-- Task and cycle type
-- Brief served
-- Outcome
-- Failure location if present (in-holon, seam, eval-escape)
-- Accounting (context consumed, agent time, approval time)
-
-## Directory Layout
-
-Each holon occupies a directory:
-
-```
-packages/<name>/
-  INTENT.md         Durable. Why it exists, assertions, invariants,
-                    anti-goals, routing summary, declared budget.
-  
-  contract.ts       Durable. Sole importable surface: types and
-                    schemas only.
-  
-  evals/            Durable. Executable correctness proof. Composition
-                    evals per composite.
-  
-  src/              Disposable. Implementation. For composites:
-                    orchestration and glue.
-```
-
-Every holon exposes an `evals` target. Workspace-level `evals` runs all.
-
-## Operational Rules
+## Rules
 
 **R1**: Every holon contains INTENT, CONTRACT, EVALS, and IMPL.
 
 **R2**: Holons import contracts only, never implementations.
 
-**R3**: Any implementation passing its evals and all ancestor evals is valid. Invalid replacements indicate insufficient evals.
+**R3**: Any implementation passing its own evals and all ancestor composition evals is a valid replacement. If a valid replacement breaks the system, the evals were insufficient: correct the evals and log the escape.
 
-**R4**: Composite implementations contain orchestration and child composition. Architecture emerges from the same cycle mechanism as all work.
+**R4**: Composite implementations contain orchestration and child composition only. Architecture emerges from the same cycle mechanism as all work.
 
-**R5**: Holon scope is bounded: bundle + implementation + dependencies ≤ declared budget. Exceeding forces split.
+**R5**: Holon scope is bounded: bundle + implementation + direct-dependency contracts ≤ declared budget. Exceeding forces a split.
 
-**R6**: Valid outcomes are (a) passing implementation, (b) renegotiation, or (c) deletion.
+**R6**: Valid cycle outcomes: (a) implementation passing evals; (b) renegotiation — a proposed change to the holon's own INTENT, CONTRACT, or EVALS, with rationale, escalated to the parent; (c) deletion (deletion-review cycles only). Discovering the specification is wrong is a successful outcome: (b).
 
-**R7**: Cycles begin with full eval suite; red evals have priority. Unreferenced intents trigger deletion reviews.
+**R7**: Cycles begin with the full eval suite; red evals outrank new work. Unreferenced intents trigger deletion reviews; outcomes are deletion or reprieve with rationale.
 
-**R8**: Humans approve durable-layer changes. Agents draft all content.
+**R8**: Agents draft all content; humans write no implementations. A durable-layer change is approved only by a human-performed merge into the trunk; the merge is the approval. Brief-log appends are exempt.
 
-**R9**: Cycles must be logged to close.
+**R9**: Cycles must be logged to close. The entry follows `logbook/TEMPLATE.md`.
 
-**R10**: Tooling follows convention. Manual adherence across ~30 cycles precedes automation.
+**R10**: Tooling follows convention. Manual adherence precedes automation; threshold per Defaults.
 
-**R11**: Every unit of external intent enters as a brief. Briefs are frozen at ingestion; the log is append-only. Change requests are new briefs.
+**R11**: Every unit of external intent enters as a brief in `docs/briefs/`, numbered sequentially; the source tool is never the canonical record. Briefs are frozen at ingestion; the log is append-only. Change requests are new briefs.
 
-**R12**: A brief closes only by human acceptance (`accept:` commit) with all spawned cycles logged. A renegotiation escalating past the root holon blocks the brief; resolution is a new brief.
+**R12**: A brief closes only by a human merging its brief-branch into the trunk, with all spawned cycles logged. A renegotiation escalating past the root holon blocks the brief; a blocked brief never merges, and resolution is a new brief.
+
+**R13**: Approval, acceptance, and status are recorded in git, never declared in-file. The binding — trunk, branches, merges, tags, commit prefixes, status derivation, replay order — is `gitflow.md`.
+
+## Defaults
+
+Budget: 50,000 tokens per holon (R5). Record consumption per cycle; revise with evidence.
+
+Automation threshold: ~30 manual cycles (R10); revise with evidence.
+
+How the four elements map to files (convention) and the catalog format (binding) are defined in `holons.md`.
 
 ## Replayability
 
-The brief log, `approve:` commits, `accept:` commits, and the logbook form a totally ordered record. Replaying briefs 0001..n from this record yields a durable layer in the same eval-equivalence class. Cycles run one at a time; the total order makes replay well-defined.
+The brief log, the merge history, and the logbook form a totally ordered record; the order is defined in `gitflow.md`. Replaying briefs 0001..n from this record yields a durable layer in the same eval-equivalence class. Cycles run one at a time; the total order makes replay well-defined.
 
 ## Revisability
 

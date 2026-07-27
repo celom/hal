@@ -1,6 +1,6 @@
 # The Cycle Logbook
 
-One file per cycle, numbered sequentially: `NNNN-<slug>.md` (copy `TEMPLATE.md`). A cycle is not closed until its entry exists (R9). Drills and deletion reviews are cycles too.
+One file per cycle (R9), numbered sequentially: `NNNN-<slug>.md` (copy `TEMPLATE.md`). Drills and deletion reviews are cycles too.
 
 This logbook is the experiment. Two instruments read from it:
 

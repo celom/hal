@@ -16,7 +16,7 @@ Nothing in the protocol binds the second axis to a specific agent. The durable l
 The protocol never trusts the author — it checks the work.
 
 - **Evals are the equalizer.** An implementation is valid because evals are green, not because a particular agent wrote it. Green is green regardless of who produced it.
-- **The human is the only privileged role.** `approve:` commits anchor the durable layer, and that anchor is agent-independent by construction.
+- **The human is the only privileged role.** Human-performed merges into `main` anchor the durable layer, and that anchor is agent-independent by construction.
 - **Everything else is authorship-blind.** Contracts, intents, logbook entries — judged by content and commit convention, never by origin.
 
 This is the same move consumer-driven contract evals make cross-team (see polyglot doc): replace trust in a counterparty with a check you own. Poly-agent extends it from *teams you don't control* to *agents you didn't pick*.
@@ -31,7 +31,7 @@ What it reframes: HAL is not a workflow for one agent. It is an **interop protoc
 
 **`TEMPLATE.md` carries more load.** Logbook entries are only comparable across agents if the template constrains structure hard. Free-form fields will drift into per-agent house styles and quietly destroy the dataset.
 
-**`approve:` needs enforcement, not convention.** With one agent, "never author an `approve:` commit" is a promptable rule. With N agents of varying discipline, it should be mechanical: a hook or CI check that rejects `approve:` commits whose author isn't on the human allowlist.
+**Human-only merges need enforcement, not convention.** With one agent, "never merge into `main`" is a promptable rule. With N agents of varying discipline, it should be mechanical: branch protection on `main` that rejects merges whose author isn't on the human allowlist.
 
 ## The experiment gets richer
 
@@ -49,6 +49,6 @@ Confound warning: agent × language × holon-difficulty are entangled. Without a
 
 ## Cheapest probe
 
-Two agents, same repo, disjoint holon sets, identical runtime — run normal cycles, then swap sets. Everything needed already exists except three small changes: move the loop to a neutral file, add the second vendor shim, add the `approve:` authorship check. Compare logbook accounting across the swap.
+Two agents, same repo, disjoint holon sets, identical runtime — run normal cycles, then swap sets. Everything needed already exists except three small changes: move the loop to a neutral file, add the second vendor shim, add branch protection on `main`. Compare logbook accounting across the swap.
 
 Prediction to falsify: failure location is a property of the methodology, not the agent — i.e., the distributions look the same. If they don't, that difference is the most valuable data this repo has produced.

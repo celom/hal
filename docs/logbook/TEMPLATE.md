@@ -7,5 +7,5 @@
 - evals: pre <green | red: which> → post <green | red: which>
 - failures: <none | short list>
 - location: in-holon | seam | eval-escape | n/a
-- accounting: context ~NNk/50k · agent ~NNm · approval ~NNm
+- accounting: context ~NNk/<declared budget> · agent ~NNm · approval ~NNm
 - lesson: <one line — optional, but the census feeds on it>
