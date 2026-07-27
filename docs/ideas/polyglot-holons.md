@@ -22,7 +22,7 @@ The contract becomes an interface definition in a neutral format. Candidates, in
 
 - **WIT (WebAssembly component model)** — near-isomorphic to the holon concept: sealed polyglot unit, typed interface, structurally incapable of seeing inside neighbors. Toolchain still maturing.
 - **Protobuf / gRPC** — mature, typed, codegen for every runtime. Pulls toward service-shaped seams.
-- **JSON Schema + OpenAPI** — lowest barrier, weakest typing, human-diffable (matters for `approve:` commits).
+- **JSON Schema + OpenAPI** — lowest barrier, weakest typing, human-diffable (matters for review at the acceptance merge).
 
 Each holon codegens its own binding from the IDL. The IDL file is the durable artifact; bindings are derived, never hand-edited, never approved.
 
@@ -48,7 +48,7 @@ Where this earns its keep: cross-team systems where stack choice is already frag
 - Systems team mandates a holon in Rust or Go.
 - Product team mandates the UI holon in TypeScript.
 
-Each team owns its holon's durable layer: `INTENT.md`, contract, evals. `approve:` commits map to per-owner sign-off. The logbook is the shared cross-team record — where seam findings between teams' holons surface as data instead of Slack arguments.
+Each team owns its holon's durable layer: `INTENT.md`, contract, evals. Acceptance merges map to per-owner sign-off. The logbook is the shared cross-team record — where seam findings between teams' holons surface as data instead of Slack arguments.
 
 HAL stops being a single-repo methodology and becomes the coordination protocol between teams that delegate implementation to agents in their own stacks. The contract IDL is the treaty; the evals are the treaty's enforcement; the logbook is the diplomatic record.
 
@@ -60,7 +60,7 @@ Two mechanisms the canon lacks. Both are multi-owner problems, not polyglot prob
 
 ### Two-key approval
 
-Renegotiation (R6b) escalates to the parent. A peer seam between two team-owned holons has no shared parent to escalate to — the contract is a **bilateral artifact**. Its approval rule must extend accordingly: a change to a bilateral contract is approved iff each owner has landed an `approve:` commit for it (one commit co-signed by both, or one per owner). The current single-owner model is the degenerate case: both keys in one hand. The mechanism is small — the approval definition already keys on commits; two-key only changes *whose* commit counts per artifact.
+Renegotiation (R6b) escalates to the parent. A peer seam between two team-owned holons has no shared parent to escalate to — the contract is a **bilateral artifact**. Its approval rule must extend accordingly: a change to a bilateral contract is approved iff each owner has merged it (one merge co-signed by both, or one per owner). The current single-owner model is the degenerate case: both keys in one hand. The mechanism is small — the approval definition already keys on merges; two-key only changes *whose* merge counts per artifact.
 
 ### Consumer-driven contract evals
 
@@ -85,6 +85,6 @@ This gives seam findings a formal destination. Instead of logging "the contract 
 
 Consistent with methodology-first: keep the system single-runtime except **one** holon in a second language. Run normal cycles. The logbook entries will show where the seams actually strain — contract expressiveness, eval orchestration, or context budget — before committing to an IDL migration.
 
-The same probe can exercise both protocol mechanisms without any IDL work: designate one seam bilateral (two-key approval on its contract) and have the consumer holon author one eval that runs in the provider's loop. Both are commit-convention and file-placement changes only.
+The same probe can exercise both protocol mechanisms without any IDL work: designate one seam bilateral (two-key approval on its contract) and have the consumer holon author one eval that runs in the provider's loop. Both are merge-convention and file-placement changes only.
 
 Prediction to falsify: contract expressiveness cracks first.

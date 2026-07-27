@@ -50,7 +50,7 @@ flowchart LR
     O -->|impl passes evals| M[merge impl]
     O -->|contract is wrong| R[renegotiation → parent]
     O -->|intent is dead| A[deletion review]
-    R --> H[human approves durable change]
+    R --> H[human approves durable change at merge]
     A --> H
     M --> N[logbook entry]
     H --> N

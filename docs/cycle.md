@@ -24,12 +24,12 @@ Every cycle ends in one of the valid outcomes (R6):
 
 Discovering that the spec is wrong is a success outcome. Say so — outcome (b) — instead of implementing around it.
 
-## 4. Land: approval and commits
+## 4. Land: branches and merges
 
-Durable files are drafted by an agent and approved by the human (R8). A durable file is approved iff its last change landed in an `approve:` commit, and draft otherwise; status is never declared in the file. Never author an `approve:` commit — those are human-only.
+A cycle runs on its own branch: `cycle/NNNN-<slug>`, NNNN the cycle's logbook number, off the brief-branch — off `main` for internally triggered cycles. Commits on it use `cycle(NNNN):`.
 
-Implementation lands as `cycle(NNNN): <summary>`, and only when evals are green.
+Merging the cycle-branch is the cycle's approval and its last act: merge mechanically once evals are green and the logbook entry (§5) is committed on the branch. Durable files are drafted by agents and approved by a human merge into `main` (R8); a durable file is approved iff its content is on `main`, and draft otherwise. Never merge into `main` — those merges are human-only. An internally triggered cycle that changed durable files therefore also waits for a human merge.
 
 ## 5. Close: log the cycle
 
-A cycle is not done until logged (R9). Copy [logbook/TEMPLATE.md](logbook/TEMPLATE.md) to `logbook/NNNN-<slug>.md`, next number in sequence. Record the brief the cycle serves — `n/a` for internally triggered cycles — so traceability runs brief → cycles → commits. Fill the failure-location and accounting fields honestly; they are the experiment.
+A cycle is not done until logged (R9); the entry lands on the cycle-branch before the merge in §4. Copy [logbook/TEMPLATE.md](logbook/TEMPLATE.md) to `logbook/NNNN-<slug>.md`, next number in sequence. Record the brief the cycle serves — `n/a` for internally triggered cycles — so traceability runs brief → cycles → commits. Fill the failure-location and accounting fields honestly; they are the experiment.
