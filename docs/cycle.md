@@ -24,4 +24,4 @@ A cycle lands by merging its cycle-branch per [gitflow](gitflow.md); the logbook
 
 ## 5. Close: log the cycle
 
-A cycle is not done until logged (R9). Copy [logbook/TEMPLATE.md](logbook/TEMPLATE.md) to `logbook/NNNN-<slug>.md`, next number in sequence. Record the brief served — `n/a` for internally triggered cycles — so traceability runs brief → cycles → commits. Fill the failure-location and accounting fields honestly; they are the experiment.
+A cycle is not done until logged (R9). Copy [logbook/TEMPLATE.md](logbook/TEMPLATE.md) to `logbook/NNNN-<slug>.md`, next number in sequence. Record the brief served — `n/a` for internally triggered cycles — so traceability runs brief → cycles → commits. Fill the failure-location and accounting fields honestly; the instruments read from them ([rationale](rationale.md)).

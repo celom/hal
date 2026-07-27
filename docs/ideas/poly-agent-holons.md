@@ -33,7 +33,7 @@ What it reframes: HAL is not a workflow for one agent. It is an **interop protoc
 
 **Human-only merges need enforcement, not convention.** With one agent, "never merge into `main`" is a promptable rule. With N agents of varying discipline, it should be mechanical: branch protection on `main` that rejects merges whose author isn't on the human allowlist.
 
-## The experiment gets richer
+## The measurements get richer
 
 The logbook's failure-location and accounting fields currently characterize *the methodology*. With multiple agents they also characterize *the agents*: does failure location correlate with executor? Does one agent produce more seam findings, more renegotiations, more eval-gaming attempts? Same holon reworked by a different agent after a reset is a direct A/B on intent-implementation fidelity.
 
