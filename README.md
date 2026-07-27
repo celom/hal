@@ -18,4 +18,4 @@ The unit is the **holon** — simultaneously a whole to its parts and a part to 
 - **The Cycle** — the [per-session protocol](docs/cycle.md): evals first, one cycle at a time, renegotiation as a success outcome, humans as reviewers rather than laborers.
 - **The Lab** — a cycle [logbook](docs/logbook/), a seam census, disposability drills, and replay drills. The measurements are the deliverable; this is research, not vibes.
 
-The reasoning behind the design lives in [rationale](docs/rationale.md); workspace mechanics in [conventions](docs/conventions.md); explorations beyond the base pattern in [ideas](docs/ideas/).
+The reasoning behind the design lives in [rationale](docs/rationale.md); the holon catalog in [indexing](docs/indexing.md); workspace layout in [conventions](docs/conventions.md); explorations beyond the base pattern in [ideas](docs/ideas/).

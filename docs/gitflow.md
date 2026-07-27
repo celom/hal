@@ -1,6 +1,6 @@
 # Git flow — authority and status in git
 
-The binding of the canon's authority model (R8, R11, R12) to git. The canon states the invariants; this document states how git records them. It is binding, not a suggestion — revising it is a mechanism change the invariants must survive.
+The binding of the canon's authority model (R8, R11–R13) to git. The canon states the invariants; this document states how git records them. It is binding, not a suggestion — revising it is a mechanism change the invariants must survive.
 
 ## Trunk
 
@@ -34,7 +34,7 @@ Merge semantics:
 
 ## Blocked
 
-A renegotiation that escalates past the root holon blocks the brief. Tag the brief-branch head `blocked/NNNN-<slug>`; the branch never merges and may then be deleted — the tag is the durable marker. The brief file stays in the log on `main`, unedited.
+For a blocked brief (R12): tag the brief-branch head `blocked/NNNN-<slug>`; the branch never merges and may then be deleted — the tag is the durable marker. The brief file stays in the log on `main`, unedited.
 
 ## Commit prefixes
 
@@ -44,7 +44,7 @@ A renegotiation that escalates past the root holon blocks the brief. Tag the bri
 
 ## Status derivation
 
-Status is never declared in-file — a declared status is a second source of truth that can drift. Derive:
+Status is never declared in-file (R13) — a declared status is a second source of truth that can drift. Derive:
 
 - **Brief**: *building* while `brief/NNNN-<slug>` is unmerged · *accepted* when merged into `main` · *blocked* when its head is tagged `blocked/NNNN-<slug>`.
 - **Cycle**: *approved* when its branch is merged.
@@ -57,7 +57,7 @@ The totally ordered record that replay depends on (canon, "Replayability"):
 - brief order = first-parent history of `main` — ingestion commits interleaved with acceptance merges;
 - cycle order within a brief = first-parent history of its brief-branch.
 
-Cycles run one at a time, so first-parent order is total. Parallel cycles would break this; the constraint is load-bearing.
+Cycles run one at a time, so first-parent order is total.
 
 ## Enforcement
 
