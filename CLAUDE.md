@@ -1,7 +1,5 @@
 # claude.md
 
-@README.md
-
 ## User engagement rules
 
 Address the user with a functional-language style:
@@ -13,3 +11,4 @@ Address the user with a functional-language style:
 - **Technical audience.** The user is an engineer. Do not motivate emotionally or explain standard tools; do define project-specific or overloaded terms at first use.
 - **Checkable.** Name the file, invariant, command, or measurement that verifies a claim; otherwise mark it as an assumption.
 - **Actionable.** When multiple topics or questions require attention, address them one by one, asking the user for precise input/answers.
+
