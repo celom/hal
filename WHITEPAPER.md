@@ -127,14 +127,14 @@ The Loop is the outer delivery process. External intent enters as a frozen brief
 #### Lifecycle
 
 ```
-external intent → ingest → plan → build (cycles) → accept | blocked
+external intent → ingest → decompose → implement (cycles) → accept | blocked
 ```
 
 **Ingest**: Capture the external item (issue, feature request, change request) verbatim into the next `docs/briefs/NNNN-<slug>.md`, append it to the trunk, and spawn the brief-branch. Work starts immediately; no approval gate precedes it.
 
-**Plan**: The catalog query maps the brief to a target holon. If the brief fits in a leaf holon, it routes there. If it exceeds one holon's budget, it routes to a composite cycle, which decomposes it into child bundles (R4). If the necessary composite holon doesn't exist, the agent authors its INTENT, CONTRACT, and EVALS (R8), adds it to the catalog, and proceeds to Build; the human approves the new holon when merging. Renegotiation is reserved for discovering the brief itself is wrong, not for architecture discovery. Planning plus composite-cycle machinery is the planning stage; the Loop defines no separate planner.
+**Decompose**: The catalog query maps the brief to a target holon. If the brief fits in a leaf holon, it routes there. If it exceeds one holon's budget, it routes to a composite cycle, which decomposes it into child bundles (R4). The artifact of this stage is the bundle(s): INTENT, CONTRACT, and EVALS for each holon that will handle the brief. If a necessary composite holon doesn't exist, the agent authors its bundle (R8), adds it to the catalog, and proceeds to Implement; the human approves the new holon when merging. Renegotiation is reserved for discovering the brief itself is wrong, not for architecture discovery. Decomposition plus composite-cycle machinery is the planning stage; the Loop defines no separate planner.
 
-**Build**: A sequence of cycles serving the brief, run per the Cycle protocol, one at a time, each on its own cycle-branch off the brief-branch.
+**Implement**: A sequence of cycles serving the brief, run per the Cycle protocol, one at a time, each on its own cycle-branch off the brief-branch. Each cycle produces an implementation (IMPL) that conforms to the bundle authored in Decompose.
 
 **Accept**: The human merges the brief-branch into the trunk; the merge is the acceptance. Red evals are not an acceptance question — a red eval is already the next cycle's task.
 
